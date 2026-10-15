@@ -1,0 +1,6 @@
+{
+  "name": "The Classic Throttle",
+  "description": "An authentic editorial journal celebrating vintage sports cars and classic motorcycles with detailed restoration guides, tuning history, and mechanical deep-dives.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
