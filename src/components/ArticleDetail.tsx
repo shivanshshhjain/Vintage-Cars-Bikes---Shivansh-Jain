@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Clock, Calendar, User, Wrench, HelpCircle, BookOpen, CheckCircle, ChevronRight, Gauge } from 'lucide-react';
+import {
+  ArrowLeft,
+  Clock,
+  Calendar,
+  Wrench,
+  HelpCircle,
+  CheckCircle,
+  ChevronRight,
+  Gauge,
+  Link2,
+  ArrowDownRight,
+  Check,
+} from 'lucide-react';
 import { Article, ARTICLES } from '../data/articles';
 import { TableOfContents } from './TableOfContents';
+import { AuthorProfile } from './AuthorProfile';
 
 interface ArticleDetailProps {
   article: Article;
@@ -20,6 +33,7 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
 }) => {
   const [activeSectionId, setActiveSectionId] = useState<string>(article.sections[0]?.id || 'overview');
   const [imageError, setImageError] = useState<boolean>(false);
+  const [copiedAnchor, setCopiedAnchor] = useState<string | null>(null);
 
   // Scrollspy to update active section
   useEffect(() => {
@@ -52,6 +66,32 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
       window.history.replaceState(null, '', `#${sectionId}`);
       setActiveSectionId(sectionId);
     }
+  };
+
+  const handleCopyAnchor = async (sectionId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    handleNavigateSection(sectionId);
+    try {
+      const url = `${window.location.origin}${window.location.pathname}#${sectionId}`;
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(url);
+        setCopiedAnchor(sectionId);
+        setTimeout(() => setCopiedAnchor(null), 2000);
+      }
+    } catch {
+      setCopiedAnchor(sectionId);
+      setTimeout(() => setCopiedAnchor(null), 2000);
+    }
+  };
+
+  // Helper to extract a short key phrase from a paragraph to use as anchor context
+  const getContextSentence = (para: string): string => {
+    const sentences = para.split('. ');
+    if (sentences.length > 0) {
+      const s = sentences[0].trim();
+      return s.length > 90 ? `${s.substring(0, 87)}...` : `${s}.`;
+    }
+    return para.substring(0, 75);
   };
 
   // Other articles in the same category or overall
@@ -121,10 +161,34 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
             {article.excerpt}
           </p>
 
+          {/* Quick-Jump In-Page Anchor Navigation Strip */}
+          <div className="p-3.5 bg-[#F4F1EA] border border-[#E7E2D8] rounded-lg mb-6">
+            <div className="text-[11px] font-mono uppercase tracking-wider text-[#78716C] mb-2 font-semibold flex items-center gap-1.5">
+              <Link2 className="w-3.5 h-3.5 text-[#143D2B]" />
+              <span>Direct In-Article Anchor Navigation</span>
+            </div>
+            <div className="flex flex-wrap gap-2 text-xs">
+              {article.sections.map((sec) => (
+                <a
+                  key={sec.id}
+                  href={`#${sec.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavigateSection(sec.id);
+                  }}
+                  className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#FBF9F5] border border-[#E7E2D8] hover:border-[#143D2B] text-[#1C1917] hover:text-[#143D2B] rounded transition-colors"
+                >
+                  <span className="text-[#143D2B] font-mono font-bold">#</span>
+                  <span className="font-medium">{sec.title}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
           {/* Byline */}
           <div className="flex items-center gap-3 py-3 border-y border-[#E7E2D8]">
             <div className="w-9 h-9 rounded-full bg-[#143D2B] text-[#FBF9F5] flex items-center justify-center font-serif font-bold text-sm">
-              {article.author.name.charAt(0)}
+              {article.author.avatarInitials || article.author.name.charAt(0)}
             </div>
             <div>
               <div className="text-xs font-semibold text-[#1C1917]">{article.author.name}</div>
@@ -171,21 +235,28 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                 id={section.id}
                 className="scroll-mt-28 border-b border-[#E7E2D8] pb-10 last:border-b-0"
               >
-                {/* Section Header with Anchor Link */}
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="font-mono text-xs text-[#143D2B] font-bold">
-                    SECTION 0{idx + 1}
+                {/* Section Header with Proper Descriptive Anchor Link */}
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-mono text-xs text-[#143D2B] font-bold tracking-wider">
+                    SECTION 0{idx + 1} · {section.id.toUpperCase().replace('-', ' ')}
                   </span>
                   <a
                     href={`#${section.id}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavigateSection(section.id);
-                    }}
-                    className="text-xs text-[#A8A29E] hover:text-[#143D2B] transition-colors"
-                    title="Permanent link to this section"
+                    onClick={(e) => handleCopyAnchor(section.id, e)}
+                    className="text-xs text-[#78716C] hover:text-[#143D2B] inline-flex items-center gap-1.5 transition-colors font-mono cursor-pointer"
+                    title={`Click to copy direct link to ${section.title}`}
                   >
-                    #anchor
+                    {copiedAnchor === section.id ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-[#143D2B]" />
+                        <span className="text-[#143D2B] font-sans font-semibold">Anchor Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Link2 className="w-3.5 h-3.5 text-[#143D2B]" />
+                        <span>#{section.id}</span>
+                      </>
+                    )}
                   </a>
                 </div>
 
@@ -199,28 +270,108 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                   </h3>
                 )}
 
-                {/* Section Paragraphs */}
-                <div className="space-y-4 text-base leading-relaxed text-[#292524] font-normal">
-                  {section.paragraphs.map((para, pIdx) => (
-                    <p
-                      key={pIdx}
-                      className={
-                        idx === 0 && pIdx === 0
-                          ? 'first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-[#143D2B]'
-                          : ''
+                {/* Section Paragraphs with Contextual Anchor Links placed directly below specific sentences */}
+                <div className="space-y-6 text-base leading-relaxed text-[#292524] font-normal">
+                  {section.paragraphs.map((para, pIdx) => {
+                    const sentenceExcerpt = getContextSentence(para);
+                    
+                    // Determine contextual cross-reference anchor to place below this specific sentence
+                    let contextualAnchor: { targetId: string; label: string; desc: string } | null = null;
+                    if (section.id === 'overview') {
+                      if (pIdx === 0) {
+                        contextualAnchor = {
+                          targetId: 'specifications',
+                          label: 'View Engineering Clearances & Factory Specifications',
+                          desc: 'Cross-reference cold tolerances and mechanical invariants',
+                        };
+                      } else if (pIdx === 1) {
+                        contextualAnchor = {
+                          targetId: 'mechanical-process',
+                          label: 'Explore Step-by-Step Restoration & Tuning Process',
+                          desc: 'Read the hands-on calibration procedure and linkage setup',
+                        };
                       }
-                    >
-                      {para}
-                    </p>
-                  ))}
+                    } else if (section.id === 'specifications') {
+                      contextualAnchor = {
+                        targetId: 'troubleshooting-qa',
+                        label: 'Jump to Diagnostic Q&A for Cold Clearance Anomalies',
+                        desc: 'Practical solutions to thermal expansion and valve lash drift',
+                      };
+                    } else if (section.id === 'mechanical-process') {
+                      if (pIdx === 0) {
+                        contextualAnchor = {
+                          targetId: 'troubleshooting-qa',
+                          label: 'Troubleshoot Linkage & Carburetor Synchronization Issues',
+                          desc: 'Field diagnoses for vacuum leaks and erratic idle speed',
+                        };
+                      }
+                    } else if (section.id === 'troubleshooting-qa') {
+                      contextualAnchor = {
+                        targetId: 'archival-verdict',
+                        label: 'Read Curator Verdict & Road Assessment',
+                        desc: 'Summary of dynamic road character and long-term preservation',
+                      };
+                    }
+
+                    return (
+                      <div key={pIdx} className="space-y-3">
+                        <p
+                          className={
+                            idx === 0 && pIdx === 0
+                              ? 'first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-[#143D2B]'
+                              : ''
+                          }
+                        >
+                          {para}
+                        </p>
+
+                        {/* Contextual Anchor Link placed directly below this specific sentence */}
+                        {contextualAnchor && (
+                          <div className="my-3 p-3 bg-[#FAF8F3] border border-[#E7E2D8] hover:border-[#143D2B]/50 rounded-md transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                            <div className="flex items-start sm:items-center gap-2 text-[#44403C]">
+                              <Link2 className="w-3.5 h-3.5 text-[#143D2B] shrink-0 mt-0.5 sm:mt-0" />
+                              <div>
+                                <span className="text-[#78716C] block sm:inline">Reference for Sentence: </span>
+                                <span className="font-serif italic text-[#1C1917]">"{sentenceExcerpt}"</span>
+                              </div>
+                            </div>
+                            <a
+                              href={`#${contextualAnchor.targetId}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleNavigateSection(contextualAnchor!.targetId);
+                              }}
+                              className="inline-flex items-center gap-1 font-semibold text-[#143D2B] hover:underline shrink-0 bg-[#FBF9F5] px-2.5 py-1 rounded border border-[#E7E2D8]"
+                            >
+                              <span>{contextualAnchor.label}</span>
+                              <ArrowDownRight className="w-3.5 h-3.5" />
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
 
                 {/* Specifications Grid if present */}
                 {section.id === 'specifications' && article.specs.length > 0 && (
-                  <div className="mt-6 bg-[#F4F1EA] border border-[#E7E2D8] rounded-lg p-5">
-                    <h4 className="font-serif font-bold text-sm text-[#1C1917] mb-3 pb-2 border-b border-[#E7E2D8]">
-                      Archival Engineering Invariants
-                    </h4>
+                  <div className="mt-8 bg-[#F4F1EA] border border-[#E7E2D8] rounded-lg p-5">
+                    <div className="flex items-center justify-between pb-2 border-b border-[#E7E2D8] mb-3">
+                      <h4 className="font-serif font-bold text-sm text-[#1C1917]">
+                        Archival Engineering Invariants & Clearances
+                      </h4>
+                      <a
+                        href="#troubleshooting-qa"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavigateSection('troubleshooting-qa');
+                        }}
+                        className="text-xs text-[#143D2B] font-semibold hover:underline inline-flex items-center gap-1"
+                      >
+                        <span>Diagnostic Q&A</span>
+                        <ArrowDownRight className="w-3 h-3" />
+                      </a>
+                    </div>
                     <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 text-xs">
                       {article.specs.map((spec, sIdx) => (
                         <div key={sIdx} className="flex justify-between py-1 border-b border-[#E7E2D8]/60">
@@ -244,43 +395,80 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                   </ul>
                 )}
 
-                {/* Paragraphs in Question-and-Answer format for Mechanical Processes */}
+                {/* Paragraphs in Question-and-Answer format with deep anchor links */}
                 {section.qaList && section.qaList.length > 0 && (
-                  <div className="mt-7 space-y-4">
-                    <div className="flex items-center gap-2 text-xs font-semibold text-[#143D2B] uppercase tracking-wider pb-2 border-b border-[#E7E2D8]">
-                      <HelpCircle className="w-4 h-4" />
-                      <span>Procedural Question & Answer Format</span>
+                  <div className="mt-8 space-y-4">
+                    <div className="flex items-center justify-between text-xs font-semibold text-[#143D2B] uppercase tracking-wider pb-2 border-b border-[#E7E2D8]">
+                      <div className="flex items-center gap-2">
+                        <HelpCircle className="w-4 h-4" />
+                        <span>Procedural Question & Answer Format ({section.qaList.length} Items)</span>
+                      </div>
+                      <span className="font-mono text-[#78716C] lowercase text-[11px]">
+                        individual anchor indexed
+                      </span>
                     </div>
 
                     <div className="space-y-4 pt-2">
-                      {section.qaList.map((qa, qaIdx) => (
-                        <div
-                          key={qaIdx}
-                          className="bg-[#F4F1EA] border border-[#E7E2D8] rounded-lg p-5 text-sm"
-                        >
-                          <h4 className="font-serif font-bold text-base text-[#1C1917] mb-2 flex items-start gap-2">
-                            <span className="font-mono text-[#143D2B] text-xs pt-1">Q:</span>
-                            <span>{qa.question}</span>
-                          </h4>
-                          <div className="text-[#44403C] leading-relaxed pl-5 space-y-2">
-                            <p>
-                              <strong className="text-[#143D2B]">A: </strong>
-                              {qa.answer}
-                            </p>
-                            {qa.proceduralTip && (
-                              <div className="mt-2.5 pt-2 border-t border-[#E7E2D8] text-xs text-[#78716C] italic flex items-start gap-2">
-                                <span className="font-semibold text-[#143D2B] not-italic">Workshop Tip:</span>
-                                <span>{qa.proceduralTip}</span>
-                              </div>
-                            )}
+                      {section.qaList.map((qa, qaIdx) => {
+                        const qaAnchorId = `qa-${section.id}-${qaIdx + 1}`;
+                        return (
+                          <div
+                            key={qaIdx}
+                            id={qaAnchorId}
+                            className="scroll-mt-28 bg-[#F4F1EA] border border-[#E7E2D8] rounded-lg p-5 text-sm"
+                          >
+                            {/* Deep Anchor Bar directly below Question Title */}
+                            <div className="flex items-center justify-between text-[11px] text-[#78716C] mb-2 pb-1.5 border-b border-[#E7E2D8]/70">
+                              <span className="font-mono font-bold text-[#143D2B]">
+                                PROCEDURAL ANCHOR #{qaIdx + 1}
+                              </span>
+                              <a
+                                href={`#${qaAnchorId}`}
+                                onClick={(e) => handleCopyAnchor(qaAnchorId, e)}
+                                className="inline-flex items-center gap-1 text-[#143D2B] hover:underline font-medium cursor-pointer"
+                              >
+                                {copiedAnchor === qaAnchorId ? (
+                                  <>
+                                    <Check className="w-3 h-3 text-[#143D2B]" />
+                                    <span>Anchor Copied!</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Link2 className="w-3 h-3" />
+                                    <span>Anchor Link to Question</span>
+                                  </>
+                                )}
+                              </a>
+                            </div>
+
+                            <h4 className="font-serif font-bold text-base text-[#1C1917] mb-2 flex items-start gap-2">
+                              <span className="font-mono text-[#143D2B] text-xs pt-1">Q:</span>
+                              <span>{qa.question}</span>
+                            </h4>
+
+                            <div className="text-[#44403C] leading-relaxed pl-5 space-y-2">
+                              <p>
+                                <strong className="text-[#143D2B]">A: </strong>
+                                {qa.answer}
+                              </p>
+                              {qa.proceduralTip && (
+                                <div className="mt-2.5 pt-2 border-t border-[#E7E2D8] text-xs text-[#78716C] italic flex items-start gap-2">
+                                  <span className="font-semibold text-[#143D2B] not-italic">Workshop Tip:</span>
+                                  <span>{qa.proceduralTip}</span>
+                                </div>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 )}
               </section>
             ))}
+
+            {/* Author Profile Component with Specialized Expertise */}
+            <AuthorProfile author={article.author} />
           </div>
 
           {/* Sticky Sidebar with In-Article Table of Contents & Anchors (Col 9-12) */}

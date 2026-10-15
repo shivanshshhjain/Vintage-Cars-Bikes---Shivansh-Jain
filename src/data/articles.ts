@@ -18,6 +18,29 @@ export interface ArticleSection {
   bulletPoints?: string[];
 }
 
+export interface Author {
+  name: string;
+  role: string;
+  bio: string;
+  expertise: string[];
+  location: string;
+  yearsActive: string;
+  avatarInitials: string;
+}
+
+export interface ExternalReference {
+  title: string;
+  source: string;
+  url: string;
+  description: string;
+  category: 'Factory Manual' | 'Historical Archive' | 'Technical Blueprint' | 'Registry';
+}
+
+export interface GlossaryTerm {
+  term: string;
+  definition: string;
+}
+
 export interface Article {
   id: string;
   slug: string;
@@ -33,10 +56,7 @@ export interface Article {
   engine: string;
   readTime: string;
   wordCount: number;
-  author: {
-    name: string;
-    role: string;
-  };
+  author: Author;
   publishedDate: string;
   image: string;
   imageAlt: string;
@@ -44,6 +64,8 @@ export interface Article {
   excerpt: string;
   specs: VehicleSpec[];
   sections: ArticleSection[];
+  externalReferences: ExternalReference[];
+  glossaryTerms: GlossaryTerm[];
 }
 
 export const ARTICLES: Article[] = [
@@ -65,6 +87,16 @@ export const ARTICLES: Article[] = [
     author: {
       name: 'Alistair Finchley',
       role: 'Chief Restorer, Coventry Heritage Works',
+      bio: 'Alistair Finchley began his apprenticeship at Browns Lane in 1988 before co-founding Coventry Heritage Works. He has personally blueprinted over eighty Jaguar XK straight-sixes and C/D-Type competition cylinder heads, with a focus on SU pneumatic balancing and Moss 4-speed gearbox restoration.',
+      expertise: [
+        'Jaguar XK 3.8/4.2 Engine Blueprinting',
+        'Triple SU HD8 Pneumatic Balancing',
+        'Moss 4-Speed Gearbox Overhaul',
+        'E-Type Monocoque Preservation',
+      ],
+      location: 'Coventry, West Midlands, UK',
+      yearsActive: '34 Years Active',
+      avatarInitials: 'AF',
     },
     publishedDate: 'October 12, 2026',
     image: '/images/jaguar-e-type-38.jpg',
@@ -165,6 +197,50 @@ export const ARTICLES: Article[] = [
         ],
       },
     ],
+    externalReferences: [
+      {
+        title: 'Jaguar Daimler Heritage Trust (JDHT) – Browns Lane Archive',
+        source: 'Jaguar Daimler Heritage Trust',
+        url: 'https://www.jaguarheritage.com/',
+        description: 'Original factory chassis dispatch ledgers, Le Mans XK engine engineering archives, and Coventry factory technical drawings.',
+        category: 'Historical Archive',
+      },
+      {
+        title: 'SU Carburetter Company Official Technical Manual & Needle Charts',
+        source: 'Burlen Fuel Systems (SU)',
+        url: 'https://sucarb.co.uk/',
+        description: 'Factory needle profile charts (UM, UO, UV), damper oil viscosity ratings, and float height specification sheets for HD8 thermo carburetors.',
+        category: 'Factory Manual',
+      },
+      {
+        title: 'The Revs Institute – 1961 Jaguar E-Type Engineering Monograph',
+        source: 'Stanford Revs Institute for Automotive Research',
+        url: 'https://revsinstitute.org/',
+        description: 'Comprehensive historical analysis of Malcolm Sayer’s aerodynamic drag studies and Sir William Lyons’ straight-port aluminum cylinder head.',
+        category: 'Technical Blueprint',
+      },
+      {
+        title: 'International E-Type Club Technical Preservation Registry',
+        source: 'E-Type Club International',
+        url: 'https://www.e-typeclub.com/',
+        description: 'Detailed mechanical register for Series 1 3.8 flat-floor survivors, Moss non-synchromesh gearbox care, and Dunlop 4-wheel disc servicing.',
+        category: 'Registry',
+      },
+    ],
+    glossaryTerms: [
+      {
+        term: 'Dashpot Damper',
+        definition: 'An oil-filled hydraulic piston assembly inside an SU carburetor that resists rapid slide lift, enriching the mixture momentarily during sudden throttle application.',
+      },
+      {
+        term: 'Straight-Port Cylinder Head',
+        definition: 'Jaguar’s revised alloy cylinder head design featuring intake ports oriented at a 30-degree incline directly toward hemispherical combustion chambers.',
+      },
+      {
+        term: 'Moss Gearbox',
+        definition: 'Jaguar’s venerable 4-speed manual transmission featuring a non-synchronized first gear, demanding a double-declutch technique for downshifts.',
+      },
+    ],
   },
   {
     id: 'aston-martin-db5-1964',
@@ -184,6 +260,16 @@ export const ARTICLES: Article[] = [
     author: {
       name: 'Reginald Vance-Smythe',
       role: 'Master Coachbuilder, Newport Pagnell Guild',
+      bio: 'Trained under former Tickford and Carrozzeria Touring master craftsmen, Reginald has spent four decades restoring hand-rolled Superleggera alloy bodies. His restoration work on Aston Martin DB4, DB5, and DB6 chassis has claimed Best of Show accolades at Villa d’Este and Pebble Beach.',
+      expertise: [
+        'Touring Superleggera Tubular Skeleton',
+        'Hand-Wheeled Alloy Panel Rolling',
+        'Galvanic Corrosion Isolation',
+        'Lead-Tin Seam Solder Loading',
+      ],
+      location: 'Newport Pagnell, Buckinghamshire, UK',
+      yearsActive: '41 Years Active',
+      avatarInitials: 'RV',
     },
     publishedDate: 'October 10, 2026',
     image: '/images/aston-martin-db5.jpg',
@@ -282,6 +368,43 @@ export const ARTICLES: Article[] = [
         ],
       },
     ],
+    externalReferences: [
+      {
+        title: 'Aston Martin Heritage Trust – Newport Pagnell Archives',
+        source: 'Aston Martin Heritage Trust (AMHT)',
+        url: 'https://amht.org.uk/',
+        description: 'Factory chassis build sheets, Tadek Marek 4.0L DOHC developmental records, and Newport Pagnell coachwork inspection documents.',
+        category: 'Historical Archive',
+      },
+      {
+        title: 'Carrozzeria Touring Superleggera Milanese Archive',
+        source: 'Carrozzeria Touring Superleggera',
+        url: 'https://www.touringsuperleggera.eu/',
+        description: 'Patented technical drawings illustrating the lightweight thin-wall tubular steel superstructure and hand-beaten Birmabright hem flanges.',
+        category: 'Technical Blueprint',
+      },
+      {
+        title: 'Aston Martin Owners Club (AMOC) Technical Service Bulletin Index',
+        source: 'Aston Martin Owners Club',
+        url: 'https://www.amoc.org/',
+        description: 'Authentic restoration protocols for galvanic barrier isolation between alloy skins and steel chassis frames.',
+        category: 'Factory Manual',
+      },
+    ],
+    glossaryTerms: [
+      {
+        term: 'Superleggera',
+        definition: 'Patented construction system utilizing a lattice of small-diameter steel tubes covered by hand-formed aluminum body panels.',
+      },
+      {
+        term: 'Galvanic Corrosion',
+        definition: 'An electrochemical reaction that occurs when dissimilar metals (like aluminum and steel) are in contact in the presence of an electrolyte, rapidly eroding the aluminum.',
+      },
+      {
+        term: 'Lead Loading',
+        definition: 'The traditional coachbuilder’s technique of applying 70/30 molten lead-tin body solder over steel seams to produce seamless, impervious panel joints.',
+      },
+    ],
   },
   {
     id: 'porsche-911-carrera-rs-1973',
@@ -301,6 +424,16 @@ export const ARTICLES: Article[] = [
     author: {
       name: 'Dietmar Kanzler',
       role: 'Zuffenhausen Air-Cooled Specialist',
+      bio: 'Dietmar spent a decade in Porsche’s historic motorsport department in Weissach before dedicating his workshop solely to 1965–1973 mechanical injection 911s. He is recognized as Europe’s foremost authority on Bosch PED 6 KL space-cam profiling and throttle Correlation Check protocols.',
+      expertise: [
+        'Bosch Mechanical Fuel Injection (MFI)',
+        'Type 911/83 Flat-Six Dyno Tuning',
+        'Nikasil Cylinder Bore Profiling',
+        'CMA Diagnostic Protocol',
+      ],
+      location: 'Stuttgart-Zuffenhausen, Germany',
+      yearsActive: '29 Years Active',
+      avatarInitials: 'DK',
     },
     publishedDate: 'October 8, 2026',
     image: '/images/porsche-911-carrera-rs.jpg',
@@ -400,6 +533,43 @@ export const ARTICLES: Article[] = [
         ],
       },
     ],
+    externalReferences: [
+      {
+        title: 'Porsche Classic Technical Service Bulletins – Type 911/83',
+        source: 'Porsche AG Classic Archive Zuffenhausen',
+        url: 'https://www.porsche.com/international/accessoriesandservice/classic/',
+        description: 'Original Stuttgart workshop bulletins for Bosch mechanical fuel injection rack correlation, Nikasil barrel tolerances, and ducktail aero testing.',
+        category: 'Factory Manual',
+      },
+      {
+        title: 'Early 911S Registry – Bosch MFI Check, Measure, Adjust (CMA)',
+        source: 'Early 911S Registry',
+        url: 'https://www.early911sregistry.org/',
+        description: 'The definitive technical troubleshooting compendium for Bosch PED 6 KL pumps, warm-running thermostats, and throttle correlation links.',
+        category: 'Technical Blueprint',
+      },
+      {
+        title: 'Carrera RS 2.7 International Chassis Registry',
+        source: 'Porsche Carrera RS Register',
+        url: 'https://www.carrerars.org/',
+        description: 'Chassis-by-chassis archival register documenting all 1,580 Homologation (M471 Lightweight and M472 Touring) 1973 production models.',
+        category: 'Registry',
+      },
+    ],
+    glossaryTerms: [
+      {
+        term: 'Raumnocken (Space Cam)',
+        definition: 'A 3-dimensional metal cam inside the Bosch MFI pump that shifts along two axes (RPM and throttle angle) to meter precise micro-liters of fuel per stroke.',
+      },
+      {
+        term: 'CMA Protocol',
+        definition: 'Check, Measure, Adjust — the strict, sequential workshop procedure developed by Porsche that mandates verifying ignition and valves before touching the fuel injection pump.',
+      },
+      {
+        term: 'Nikasil',
+        definition: 'An electroplated nickel-silicon carbide matrix applied directly onto aluminum cylinder bores, providing ultra-low friction and rapid heat dissipation.',
+      },
+    ],
   },
   {
     id: 'alfa-romeo-giulia-gta-1967',
@@ -419,6 +589,16 @@ export const ARTICLES: Article[] = [
     author: {
       name: 'Gianluigi Moretti',
       role: 'Historic Motorsport Specialist, Autodelta Registry',
+      bio: 'Gianluigi worked as a young race mechanic in the original Autodelta competition department under Carlo Chiti during the final European Touring Car seasons. Today he curates the Italian GTA registry and prepares historic Alfa Romeos for the Tour Auto and Goodwood Revival.',
+      expertise: [
+        'Bialbero Nord Twin-Spark Timing',
+        'Autodelta Sliding Block Suspensions',
+        'Weber 45 DCOE Progression Calibration',
+        'Peraluman 25 Alloy Preservation',
+      ],
+      location: 'Settimo Milanese, Italy',
+      yearsActive: '32 Years Active',
+      avatarInitials: 'GM',
     },
     publishedDate: 'October 5, 2026',
     image: '/images/alfa-romeo-giulia-gta.jpg',
@@ -517,6 +697,43 @@ export const ARTICLES: Article[] = [
         ],
       },
     ],
+    externalReferences: [
+      {
+        title: 'Museo Storico Alfa Romeo – Autodelta Racing Archive',
+        source: 'Museo Storico Alfa Romeo (Arese)',
+        url: 'https://www.museoalfaromeo.com/',
+        description: 'Carlo Chiti’s original engineering notes on the twin-spark cylinder head, lightweight Elektron magnesium castings, and sliding-block rear suspension.',
+        category: 'Historical Archive',
+      },
+      {
+        title: 'Alfa Romeo Bialbero Competition Tuning Manual',
+        source: 'Autodelta Historic Technical Guild',
+        url: 'https://www.alfabb.com/',
+        description: 'Factory vernier cam sprocket degree charts, Weber 45 DCOE 14 jetting progressions, and high-G oil sump baffle designs.',
+        category: 'Factory Manual',
+      },
+      {
+        title: 'Historic European Touring Car Championship Registry',
+        source: 'FIA Historic Motorsport Archive',
+        url: 'https://www.fia.com/',
+        description: 'Homologation papers (Form 1380) for Group 2 Giulia Sprint GTA competition models from the 1966–1969 championship seasons.',
+        category: 'Registry',
+      },
+    ],
+    glossaryTerms: [
+      {
+        term: 'Vernier Cam Sprockets',
+        definition: 'Adjustable camshaft gears with indexed vernier pin-holes that enable micrometer-precise valve timing adjustments without altering chain link count.',
+      },
+      {
+        term: 'Sliding Block (Sliding Trunnion)',
+        definition: 'An Autodelta-designed rear suspension link that guides the live rear axle along a vertical bronze slider, drastically lowering the chassis roll center.',
+      },
+      {
+        term: 'Peraluman 25',
+        definition: 'An aerospace-grade magnesium-aluminum alloy sheet metal used to skin the GTA body, reducing total vehicle weight by over 200 kg.',
+      },
+    ],
   },
   {
     id: 'mercedes-benz-300-sl-1955',
@@ -536,6 +753,16 @@ export const ARTICLES: Article[] = [
     author: {
       name: 'Dr. Klaus von Helfenstein',
       role: 'Director, Stuttgart Classic Archive',
+      bio: 'Dr. von Helfenstein is an automotive historian and metallurgical conservator who led the technical archives for Mercedes-Benz Classic. He has authored definitive engineering monographs on the M198 direct injection system and Rudolf Uhlenhaut’s tubular spaceframe metallurgy.',
+      expertise: [
+        'Bosch Direct Gasoline Injection (W198)',
+        'Multi-Tubular Steel Spaceframe Alignment',
+        'Dry-Sump Lubrication Engineering',
+        'Gullwing Torsion Counterbalance Setup',
+      ],
+      location: 'Sindelfingen, Germany',
+      yearsActive: '37 Years Active',
+      avatarInitials: 'KV',
     },
     publishedDate: 'October 2, 2026',
     image: '/images/mercedes-300sl-gullwing.jpg',
@@ -634,6 +861,43 @@ export const ARTICLES: Article[] = [
         ],
       },
     ],
+    externalReferences: [
+      {
+        title: 'Mercedes-Benz Classic Center Archives – Sindelfingen',
+        source: 'Mercedes-Benz Classic',
+        url: 'https://www.mercedes-benz.com/en/classic/',
+        description: 'Rudolf Uhlenhaut’s engineering documentation on the tubular spaceframe chassis, canted M198 engine, and direct cylinder gasoline injection.',
+        category: 'Historical Archive',
+      },
+      {
+        title: 'Bosch Historic Archives – PES 6 KL Direct Injection Manual',
+        source: 'Robert Bosch GmbH Classic Archive',
+        url: 'https://www.bosch-classic.com/',
+        description: 'Workshop calibration protocols, nozzle pop-off testing procedures (45 bar), and fuel rack governor adjustments for the 300 SL.',
+        category: 'Factory Manual',
+      },
+      {
+        title: 'Gull Wing Group International Technical Library',
+        source: 'Gull Wing Group International',
+        url: 'https://gullwinggroup.org/',
+        description: 'Peer-reviewed technical restoration treatises on door torsion bar balancing, dry-sump oil priming, and swing-axle negative camber setups.',
+        category: 'Registry',
+      },
+    ],
+    glossaryTerms: [
+      {
+        term: 'Multi-Tubular Spaceframe',
+        definition: 'A rigid three-dimensional birdcage constructed from welded chrome-molybdenum steel triangles, weighing only 82 kg while providing extreme torsional rigidity.',
+      },
+      {
+        term: 'Direct Gasoline Injection',
+        definition: 'A fuel metering system that sprays atomized fuel directly into the combustion chamber rather than into the intake runner, yielding higher compression and volumetric efficiency.',
+      },
+      {
+        term: 'Swing-Axle Jacking',
+        definition: 'A dynamic handling phenomenon where high cornering forces cause independent swing axles to tuck underneath the vehicle, suddenly pitching the rear chassis upward.',
+      },
+    ],
   },
   {
     id: 'chevrolet-corvette-l88-1968',
@@ -653,6 +917,16 @@ export const ARTICLES: Article[] = [
     author: {
       name: 'Hank "Boog" Callahan',
       role: 'Vintage SCCA Engine Builder & Historic Dyno Master',
+      bio: 'Boog cut his teeth building 427 Mark IV big-blocks for historic Trans-Am and Corvette SCCA A-Production racers. He operates one of the few remaining Sun distributor curve test benches on the East Coast and specializes in solid-lifter high-compression American V8s.',
+      expertise: [
+        'Chevrolet L88 427 Competition Clearances',
+        'Solid-Lifter Hot Valve Lash Tuning',
+        'Holley 4150 Double Pumper Calibration',
+        'Sun Distributor Mechanical Curves',
+      ],
+      location: 'Mooresville, North Carolina, USA',
+      yearsActive: '36 Years Active',
+      avatarInitials: 'HC',
     },
     publishedDate: 'September 28, 2026',
     image: '/images/corvette-l88-427.jpg',
@@ -751,6 +1025,43 @@ export const ARTICLES: Article[] = [
         ],
       },
     ],
+    externalReferences: [
+      {
+        title: 'GM Heritage Center – 1968 Corvette L88 Technical Archive',
+        source: 'General Motors Heritage Center',
+        url: 'https://www.gmheritagecenter.com/',
+        description: 'Zora Arkus-Duntov’s internal engineering memos specifying competition J56 brakes, F41 suspension, and open-chamber aluminum head casting #3927291.',
+        category: 'Historical Archive',
+      },
+      {
+        title: 'National Corvette Restorers Society (NCRS) L88 Manual',
+        source: 'National Corvette Restorers Society',
+        url: 'https://www.ncrs.org/',
+        description: 'Authentic judging standards, factory solid-lifter clearance specifications (0.024/0.026 hot), and Sun distributor curve documentation.',
+        category: 'Factory Manual',
+      },
+      {
+        title: 'Holley Performance Technical Archives – Model 4150 List 4296',
+        source: 'Holley Motor Sports',
+        url: 'https://www.holley.com/',
+        description: 'Tuning sheets for the competition 850 CFM double-pumper carburetor, including 50cc accelerator pump cam profiles and power valve block-offs.',
+        category: 'Technical Blueprint',
+      },
+    ],
+    glossaryTerms: [
+      {
+        term: 'Solid-Lifter Camshaft',
+        definition: 'A mechanical camshaft that uses solid steel tappets rather than hydraulic oil-filled cushions, requiring manual valve lash adjustment but capable of 7,000+ RPM without valve float.',
+      },
+      {
+        term: 'EOIC Method',
+        definition: 'Exhaust Opening, Intake Closing — the universal protocol for positioning a camshaft lobe on its base circle to set valve lash with precision feeler gauges.',
+      },
+      {
+        term: 'Cowl-Induction Hood',
+        definition: 'A specialized hood with a rear-facing scoop positioned at the high-pressure base of the windshield, feeding dense ambient air directly to the carburetor.',
+      },
+    ],
   },
   {
     id: 'ferrari-250-gt-lusso-1963',
@@ -770,6 +1081,16 @@ export const ARTICLES: Article[] = [
     author: {
       name: 'Matteo Bellini',
       role: 'Master Engine Conservator, Maranello Classiche',
+      bio: 'Trained in Modena’s Motor Valley, Matteo has conserved and overhauled over sixty Colombo and Lampredi V12 powerplants. He is renowned for his precision phasing of dual Magneti Marelli ignition distributors and fine balance of triple twin-choke Weber downdraft carburetors.',
+      expertise: [
+        'Colombo 60° V12 Valve Geometry',
+        'Dual Magneti Marelli Phase Sync',
+        'Triple Weber 36 DCL6 Setup',
+        'Borrani Wire Wheel Trueing',
+      ],
+      location: 'Modena, Emilia-Romagna, Italy',
+      yearsActive: '30 Years Active',
+      avatarInitials: 'MB',
     },
     publishedDate: 'September 24, 2026',
     image: '/images/ferrari-250-gt-lusso.jpg',
@@ -868,6 +1189,43 @@ export const ARTICLES: Article[] = [
         ],
       },
     ],
+    externalReferences: [
+      {
+        title: 'Ferrari Classiche Department – Maranello Archives',
+        source: 'Ferrari S.p.A. Maranello',
+        url: 'https://www.ferrari.com/en-EN/auto/ferrari-classiche',
+        description: 'Original factory build ledgers, Colombo Tipo 168/U 60° V12 engine assembly tolerances, and Scaglietti coachwork alignment datum sheets.',
+        category: 'Historical Archive',
+      },
+      {
+        title: 'Magneti Marelli Historic Ignition Archives – Dual S85A',
+        source: 'Magneti Marelli Heritage',
+        url: 'https://www.marelli.com/',
+        description: 'Timing synchronization diagrams for dual distributor setups, mechanical advance counterweight calibrations, and point gap specs.',
+        category: 'Technical Blueprint',
+      },
+      {
+        title: 'Barchetta Ferrari 250 GT/L Lusso Provenance Registry',
+        source: 'Barchetta Historic Motor Registry',
+        url: 'https://www.barchetta.cc/',
+        description: 'Comprehensive archival provenance tracing all 351 production chassis delivered between 1962 and 1964.',
+        category: 'Registry',
+      },
+    ],
+    glossaryTerms: [
+      {
+        term: 'Colombo V12',
+        definition: 'The immortal 60-degree all-alloy V12 designed by Gioacchino Colombo that powered Ferrari sports and racing cars from 1.5 litres in 1947 to 3.0 litres in the 250 series.',
+      },
+      {
+        term: 'Hairpin Valve Springs',
+        definition: 'Torsion-bar style external wire valve springs that resist resonant flutter at high engine speeds, allowing Colombo engines to safely exceed 7,500 RPM.',
+      },
+      {
+        term: 'Anticipo Fisso (AF)',
+        definition: 'Italian for "fixed initial ignition advance", marked on the Ferrari flywheel (8° BTDC) to calibrate base distributor contact breaker points.',
+      },
+    ],
   },
   {
     id: 'triumph-bonneville-t120-1969',
@@ -887,6 +1245,16 @@ export const ARTICLES: Article[] = [
     author: {
       name: 'Geoff "Spanner" Abernathy',
       role: 'Meriden Historic Motorcycle Conservator',
+      bio: 'Geoff started his career at Triumph’s Meriden works in 1971 before opening his own vintage twin workshop. He is an acknowledged technical contributor to the Vintage Motor Cycle Club and has re-engineered pushrod tube oil seals and twin Amal idle balancing protocols.',
+      expertise: [
+        'Meriden Triumph 650/750 Parallel-Twins',
+        'Twin Amal Concentric Carburetor Balancing',
+        'Lucas 6CA Strobe Ignition Timing',
+        'Wet-Sump Elimination Engineering',
+      ],
+      location: 'Solihull, West Midlands, UK',
+      yearsActive: '38 Years Active',
+      avatarInitials: 'GA',
     },
     publishedDate: 'September 20, 2026',
     image: '/images/triumph-bonneville-t120.jpg',
@@ -985,6 +1353,43 @@ export const ARTICLES: Article[] = [
         ],
       },
     ],
+    externalReferences: [
+      {
+        title: 'Vintage Motor Cycle Club (VMCC) – Meriden Factory Archives',
+        source: 'Vintage Motor Cycle Club UK',
+        url: 'https://www.vmcc.net/',
+        description: 'Meriden engineering drawings, Edward Turner 650cc parallel-twin workshop manuals, and 1969 12V electrical system schematics.',
+        category: 'Historical Archive',
+      },
+      {
+        title: 'Amal Carburetter Official Technical Compendium – 900 Series',
+        source: 'The Amal Carburetter Company',
+        url: 'https://amalcarb.co.uk/',
+        description: 'Concentric 930 needle jet charts, throttle slide cutaway selection guides, and idle air screw synchronization procedures.',
+        category: 'Factory Manual',
+      },
+      {
+        title: 'Triumph Owners Motor Cycle Club (TOMCC) Heritage Registry',
+        source: 'Triumph Owners Motor Cycle Club',
+        url: 'https://www.tomcc.org/',
+        description: 'Field service bulletins on pushrod tube seal shimming, double-plunger oil pump check valves, and wet-sumping remedies.',
+        category: 'Registry',
+      },
+    ],
+    glossaryTerms: [
+      {
+        term: 'Wet-Sumping',
+        definition: 'A condition where motor oil slowly drains from the elevated oil tank past pump check-balls into the crankcase sump during prolonged storage, causing hydraulic drag and oil foaming.',
+      },
+      {
+        term: '360° Parallel-Twin',
+        definition: 'An engine layout where both pistons rise and fall together but fire on alternate rotations (every 360 degrees of crank travel), producing balanced firing pulses and a signature exhaust note.',
+      },
+      {
+        term: 'Concentric Float Chamber',
+        definition: 'Amal’s 1967 design that places the carburetor float chamber directly around the main jet nozzle rather than in a separate side-chamber, eliminating fuel starvation during hard cornering.',
+      },
+    ],
   },
   {
     id: 'norton-commando-850-1974',
@@ -1004,6 +1409,16 @@ export const ARTICLES: Article[] = [
     author: {
       name: 'Terence "Terry" Golding',
       role: 'Norton Owners Club Senior Technical Adviser',
+      bio: 'Terry has spent three decades diagnosing Commando frame wobble and shimming Isolastic mount systems across the UK and North America. His technical papers on swingarm cradle bushing tolerances and vernier adjuster calibration are standard workshop reference material.',
+      expertise: [
+        'Isolastic Anti-Vibration Mount Shimming',
+        'Norton 850 High-Speed Chassis Alignment',
+        'AMC 4-Speed Gearbox & Diaphragm Clutch',
+        'Triplex Primary Drive Calibration',
+      ],
+      location: 'Kidderminster, Worcestershire, UK',
+      yearsActive: '35 Years Active',
+      avatarInitials: 'TG',
     },
     publishedDate: 'September 16, 2026',
     image: '/images/norton-commando-850.jpg',
@@ -1102,6 +1517,43 @@ export const ARTICLES: Article[] = [
         ],
       },
     ],
+    externalReferences: [
+      {
+        title: 'Norton Owners Club (NOC) – Isolastic Technical Compendium',
+        source: 'Norton Owners Club UK',
+        url: 'https://www.nortonownersclub.org/',
+        description: 'Dr. Stefan Bauer’s patented Isolastic frame vibration dampening treatise, dial indicator end-float shimming procedures, and swingarm cradle alignment.',
+        category: 'Technical Blueprint',
+      },
+      {
+        title: 'Andover Norton Historic Engineering Library',
+        source: 'Andover Norton Ltd.',
+        url: 'https://andover-norton.co.uk/',
+        description: 'Original factory workshop blueprints, vernier adjuster service bulletins for 850 Mk2A/Mk3 models, and AMC gearbox assembly tolerances.',
+        category: 'Factory Manual',
+      },
+      {
+        title: 'National Motorcycle Museum (UK) – Commando Archive',
+        source: 'National Motorcycle Museum Birmingham',
+        url: 'https://www.nationalmotorcyclemuseum.co.uk/',
+        description: 'Historical records of the Commando’s development, Isle of Man Production TT victories, and John Player Norton racing engineering.',
+        category: 'Historical Archive',
+      },
+    ],
+    glossaryTerms: [
+      {
+        term: 'Isolastic System',
+        definition: 'An engineering design where the engine, gearbox, and swingarm are bolted into a rigid sub-cradle isolated from the main frame by rubber buffers, neutralizing parallel-twin vibration above 2,800 RPM.',
+      },
+      {
+        term: 'End-Float',
+        definition: 'The lateral clearance between the engine cradle sleeve and the frame buffers, which must be kept between 0.005 and 0.010 inches to prevent both vibration and high-speed chassis weave.',
+      },
+      {
+        term: 'Diaphragm Clutch',
+        definition: 'A compact clutch mechanism employing a belleville spring disc instead of traditional coil springs, offering light lever pull and uniform pressure plate engagement.',
+      },
+    ],
   },
   {
     id: 'moto-guzzi-v7-sport-1972',
@@ -1121,6 +1573,16 @@ export const ARTICLES: Article[] = [
     author: {
       name: 'Sergio "Aquila" Bonetti',
       role: 'Mandello del Lario Historic Registry Historian',
+      bio: 'Born in Mandello del Lario within earshot of the Moto Guzzi wind tunnel, Sergio has documented every iteration of the V7 Sport and 850 Le Mans. He specializes in bevel ring-and-pinion backlash shimming and Dell’Orto VHB square-slide fuel metering.',
+      expertise: [
+        'Lino Tonti Swan-Neck Frame Geometry',
+        'Moto Guzzi Spiral Bevel Shaft Drive Backlash',
+        'Dell’Orto VHB Square-Slide Rebuilding',
+        '90° Transverse V-Twin Valve Float Diagnosis',
+      ],
+      location: 'Mandello del Lario, Lake Como, Italy',
+      yearsActive: '31 Years Active',
+      avatarInitials: 'SB',
     },
     publishedDate: 'September 12, 2026',
     image: '/images/moto-guzzi-v7-sport.jpg',
@@ -1217,6 +1679,43 @@ export const ARTICLES: Article[] = [
           'The 1972 Moto Guzzi V7 Sport is a motorcycling monument. Rolling through high-speed Alpine curves, the Tonti chassis feels carved from a single billet of chrome-moly steel. The transverse cylinders warm the rider’s knees, the intake trumpets sing, and the cardan shaft drives cleanly forward with zero chain slap.',
           'It is a mechanical sculpture of enduring Italian passion, rewarding every moment spent tuning its precision bevel gears and square-slide Dell’Ortos.',
         ],
+      },
+    ],
+    externalReferences: [
+      {
+        title: 'Moto Guzzi Historical Archive – Mandello del Lario',
+        source: 'Moto Guzzi S.p.A. Historical Archive',
+        url: 'https://www.motoguzzi.com/en_EN/tradition/',
+        description: 'Lino Tonti’s original chrome-moly spine frame blueprints, wind-tunnel drag coefficients, and 200 km/h factory test certification documents.',
+        category: 'Historical Archive',
+      },
+      {
+        title: 'Dell’Orto Historic Carburetor Rebuild Compendium – VHB Series',
+        source: 'Dell’Orto S.p.A.',
+        url: 'https://www.dellorto.it/',
+        description: 'Square-slide velocity stack tuning specifications, needle tapers, and float arm calibration (24.0 mm) for the V7 Sport.',
+        category: 'Factory Manual',
+      },
+      {
+        title: 'Moto Guzzi National Owners Club (MGNOC) Technical Library',
+        source: 'Moto Guzzi National Owners Club',
+        url: 'https://www.mgnoc.com/',
+        description: 'Comprehensive procedures for checking spiral bevel ring-and-pinion gear backlash, Prussian blue gear tooth patterns, and MoS2 gear oil additives.',
+        category: 'Technical Blueprint',
+      },
+    ],
+    glossaryTerms: [
+      {
+        term: 'Swan-Neck Frame',
+        definition: 'Lino Tonti’s revolutionary straight-tube spine chassis that clamps tightly around the 90° V-twin, placing the motorcycle’s center of gravity inches off the pavement.',
+      },
+      {
+        term: 'Bevel Drive Backlash',
+        definition: 'The mechanical clearance between the spiral bevel drive pinion and the rear crown gear (0.004–0.006 in), critical for preventing gear tooth whine and drivetrain lash.',
+      },
+      {
+        term: 'Cardan Shaft',
+        definition: 'An enclosed longitudinal drive shaft with universal joints connecting the transmission output to the rear final drive bevel box, eliminating chain maintenance.',
       },
     ],
   },
