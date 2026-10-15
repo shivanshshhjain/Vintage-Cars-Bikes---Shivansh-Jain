@@ -36,37 +36,40 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-2 text-xs text-[#D6CEBE]">
               <li>
-                <button
-                  onClick={() => {
-                    onNavigateHome();
-                    onSelectCategory('cars');
-                  }}
-                  className="hover:text-white transition-colors cursor-pointer"
+                <a
+                  href="/classification/classic-automobiles"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                  title="Open Classic Automobiles Classification in a new tab"
                 >
-                  Classic Automobiles (7 Monographs)
-                </button>
+                  <span>Classic Automobiles (7 Monographs)</span>
+                  <span className="text-[10px] text-[#A3B899] font-mono">↗</span>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => {
-                    onNavigateHome();
-                    onSelectCategory('motorcycles');
-                  }}
-                  className="hover:text-white transition-colors cursor-pointer"
+                <a
+                  href="/classification/vintage-motorcycles"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                  title="Open Vintage Motorcycles Classification in a new tab"
                 >
-                  Vintage Motorcycles (3 Monographs)
-                </button>
+                  <span>Vintage Motorcycles (3 Monographs)</span>
+                  <span className="text-[10px] text-[#A3B899] font-mono">↗</span>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => {
-                    onNavigateHome();
-                    onSelectCategory('all');
-                  }}
-                  className="hover:text-white transition-colors cursor-pointer"
+                <a
+                  href="/classification/all-articles"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                  title="Open Complete Editorial Archive in a new tab"
                 >
-                  Complete Editorial Archive (10 Articles)
-                </button>
+                  <span>Complete Editorial Archive (10 Articles)</span>
+                  <span className="text-[10px] text-[#A3B899] font-mono">↗</span>
+                </a>
               </li>
             </ul>
           </div>

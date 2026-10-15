@@ -11,10 +11,14 @@ import {
   Link2,
   ArrowDownRight,
   Check,
+  ExternalLink,
 } from 'lucide-react';
 import { Article, ARTICLES } from '../data/articles';
 import { TableOfContents } from './TableOfContents';
 import { AuthorProfile } from './AuthorProfile';
+import { ExternalReferences } from './ExternalReferences';
+import { MechanicalGlossary } from './MechanicalGlossary';
+import { NextReads } from './NextReads';
 
 interface ArticleDetailProps {
   article: Article;
@@ -103,14 +107,29 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
       <div className="border-b border-[#E7E2D8] bg-[#F4F1EA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between text-xs text-[#78716C]">
           <nav className="flex items-center gap-1.5 overflow-x-auto whitespace-nowrap" aria-label="Breadcrumb">
-            <button
-              onClick={onNavigateHome}
+            <a
+              href="/"
+              onClick={(e) => {
+                if (!e.ctrlKey && !e.metaKey) {
+                  e.preventDefault();
+                  onNavigateHome();
+                }
+              }}
               className="hover:text-[#143D2B] transition-colors cursor-pointer"
             >
               The Classic Throttle
-            </button>
+            </a>
             <ChevronRight className="w-3 h-3 text-[#A8A29E]" />
-            <span>{article.categoryLabel}</span>
+            <a
+              href={article.category === 'cars' ? '/classification/classic-automobiles' : '/classification/vintage-motorcycles'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#143D2B] hover:underline transition-colors inline-flex items-center gap-1 cursor-pointer"
+              title={`Open ${article.categoryLabel} classification in a new tab`}
+            >
+              <span>{article.categoryLabel}</span>
+              <ExternalLink className="w-2.5 h-2.5 text-[#A8A29E]" />
+            </a>
             <ChevronRight className="w-3 h-3 text-[#A8A29E]" />
             <span className="text-[#1C1917] font-medium truncate max-w-[240px] sm:max-w-md">
               {article.shortTitle}
@@ -183,6 +202,15 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                 </a>
               ))}
             </div>
+          </div>
+
+          {/* Authoritative External Reference Sources (Compact Header Preview) */}
+          <div className="mb-6">
+            <ExternalReferences
+              references={article.externalReferences}
+              variant="compact"
+              articleTitle={article.shortTitle}
+            />
           </div>
 
           {/* Byline */}
@@ -469,6 +497,25 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
 
             {/* Author Profile Component with Specialized Expertise */}
             <AuthorProfile author={article.author} />
+
+            {/* Full Archival External References Section */}
+            <ExternalReferences
+              references={article.externalReferences}
+              variant="full"
+              articleTitle={article.shortTitle}
+            />
+
+            {/* Interactive Mechanical Glossary */}
+            <MechanicalGlossary
+              terms={article.glossaryTerms}
+              articleTitle={article.shortTitle}
+            />
+
+            {/* Next Reads & Curated Editorial Offerings */}
+            <NextReads
+              currentArticle={article}
+              onSelectArticle={onSelectArticle}
+            />
           </div>
 
           {/* Sticky Sidebar with In-Article Table of Contents & Anchors (Col 9-12) */}

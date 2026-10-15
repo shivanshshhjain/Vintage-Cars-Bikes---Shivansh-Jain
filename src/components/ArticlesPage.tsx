@@ -76,7 +76,11 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({
           {/* Category Tabs */}
           <div className="flex items-center gap-1 p-1 bg-[#EBE6DF] rounded-lg overflow-x-auto">
             <button
-              onClick={() => setCategory('all')}
+              onClick={() => {
+                setCategory('all');
+                window.history.pushState(null, '', '/classification/all-articles');
+                window.dispatchEvent(new Event('popstate'));
+              }}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all whitespace-nowrap cursor-pointer ${
                 category === 'all'
                   ? 'bg-[#143D2B] text-white shadow-xs'
@@ -86,7 +90,11 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({
               All Articles ({ARTICLES.length})
             </button>
             <button
-              onClick={() => setCategory('cars')}
+              onClick={() => {
+                setCategory('cars');
+                window.history.pushState(null, '', '/classification/classic-automobiles');
+                window.dispatchEvent(new Event('popstate'));
+              }}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all whitespace-nowrap cursor-pointer ${
                 category === 'cars'
                   ? 'bg-[#143D2B] text-white shadow-xs'
@@ -96,7 +104,11 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({
               Automobiles (7)
             </button>
             <button
-              onClick={() => setCategory('motorcycles')}
+              onClick={() => {
+                setCategory('motorcycles');
+                window.history.pushState(null, '', '/classification/vintage-motorcycles');
+                window.dispatchEvent(new Event('popstate'));
+              }}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all whitespace-nowrap cursor-pointer ${
                 category === 'motorcycles'
                   ? 'bg-[#143D2B] text-white shadow-xs'

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bookmark, Clock, ArrowRight, Gauge } from 'lucide-react';
+import { Bookmark, Clock, ArrowRight, Gauge, ExternalLink } from 'lucide-react';
 import { Article } from '../data/articles';
 
 interface ArticleCardProps {
@@ -19,18 +19,27 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 }) => {
   const [imageError, setImageError] = useState(false);
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
+      e.preventDefault();
+      onSelectArticle(article.slug);
+    }
+  };
+
   return (
     <article
-      onClick={() => onSelectArticle(article.slug)}
-      className={`group cursor-pointer bg-[#FBF9F5] border border-[#E7E2D8] hover:border-[#143D2B]/40 rounded-lg transition-all duration-200 overflow-hidden flex flex-col ${
+      className={`group bg-[#FBF9F5] border border-[#E7E2D8] hover:border-[#143D2B]/40 rounded-lg transition-all duration-200 overflow-hidden flex flex-col relative ${
         featured ? 'lg:grid lg:grid-cols-12 lg:gap-8' : ''
       }`}
     >
       {/* Visual Asset Container */}
-      <div
-        className={`relative overflow-hidden bg-[#EBE6DF] ${
+      <a
+        href={`/articles/${article.slug}`}
+        onClick={handleClick}
+        className={`relative overflow-hidden bg-[#EBE6DF] block cursor-pointer ${
           featured ? 'lg:col-span-7 aspect-[4/3] lg:aspect-auto lg:h-full min-h-[260px]' : 'aspect-[4/3] w-full'
         }`}
+        aria-label={`Read ${article.title}`}
       >
         {!imageError ? (
           <img
@@ -50,21 +59,21 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
             <span className="text-xs text-[#78716C] mt-1">{article.engine}</span>
           </div>
         )}
+      </a>
 
-        {/* Quiet Bookmark Toggle */}
-        <button
-          onClick={(e) => onToggleBookmark(article.id, e)}
-          className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-colors cursor-pointer ${
-            isBookmarked
-              ? 'bg-[#143D2B] text-[#FBF9F5] shadow-sm'
-              : 'bg-[#FBF9F5]/90 text-[#44403C] hover:text-[#143D2B] hover:bg-white'
-          }`}
-          aria-label={isBookmarked ? 'Remove bookmark' : 'Bookmark article'}
-          title={isBookmarked ? 'Saved to reading list' : 'Save to reading list'}
-        >
-          <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
-        </button>
-      </div>
+      {/* Quiet Bookmark Toggle */}
+      <button
+        onClick={(e) => onToggleBookmark(article.id, e)}
+        className={`absolute top-3 right-3 z-10 p-2 rounded-full backdrop-blur-md transition-colors cursor-pointer ${
+          isBookmarked
+            ? 'bg-[#143D2B] text-[#FBF9F5] shadow-sm'
+            : 'bg-[#FBF9F5]/90 text-[#44403C] hover:text-[#143D2B] hover:bg-white'
+        }`}
+        aria-label={isBookmarked ? 'Remove bookmark' : 'Bookmark article'}
+        title={isBookmarked ? 'Saved to reading list' : 'Save to reading list'}
+      >
+        <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
+      </button>
 
       {/* Content Area */}
       <div
@@ -91,7 +100,13 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
               featured ? 'text-2xl lg:text-3xl' : 'text-xl'
             }`}
           >
-            {article.shortTitle}
+            <a
+              href={`/articles/${article.slug}`}
+              onClick={handleClick}
+              className="hover:underline decoration-[#143D2B]/30"
+            >
+              {article.shortTitle}
+            </a>
           </h2>
 
           {/* Excerpt */}
@@ -105,10 +120,14 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           <span className="font-mono text-[#78716C] line-clamp-1 max-w-[200px]" title={article.engine}>
             {article.engine}
           </span>
-          <span className="inline-flex items-center gap-1 font-semibold text-[#143D2B] group-hover:translate-x-0.5 transition-transform">
+          <a
+            href={`/articles/${article.slug}`}
+            onClick={handleClick}
+            className="inline-flex items-center gap-1 font-semibold text-[#143D2B] group-hover:translate-x-0.5 transition-transform"
+          >
             <span>Read Article</span>
             <ArrowRight className="w-3.5 h-3.5" />
-          </span>
+          </a>
         </div>
       </div>
     </article>
