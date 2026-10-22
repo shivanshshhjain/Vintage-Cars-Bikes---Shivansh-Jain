@@ -45,12 +45,12 @@ export const SavedPage: React.FC<SavedPageProps> = ({
   const savedArticles = ARTICLES.filter((a) => savedIds.includes(a.id));
 
   return (
-    <div className="bg-[#FBF9F5] min-h-screen pb-24">
+    <div className="bg-[#FAF8F5] min-h-screen pb-24">
       {/* Header Banner */}
-      <section className="bg-[#F4F1EA] border-b border-[#E7E2D8] py-12 lg:py-16">
+      <section className="bg-[#F5F2EB] border-b border-[#EAE5DC] py-14 lg:py-18">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="text-xs uppercase tracking-widest font-sans font-semibold text-[#143D2B] mb-2 flex items-center gap-2">
+            <div className="text-[11px] uppercase tracking-widest font-sans font-semibold text-[#143D2B] mb-2.5 flex items-center gap-2">
               <Bookmark className="w-4 h-4 text-[#143D2B] fill-current" />
               <span>Personal Curatorial Study Desk</span>
             </div>
@@ -65,7 +65,7 @@ export const SavedPage: React.FC<SavedPageProps> = ({
       </section>
 
       {/* Action Utility Bar */}
-      <div className="border-b border-[#E7E2D8] bg-[#FBF9F5] py-3.5">
+      <div className="border-b border-[#EAE5DC] bg-[#FAF8F5] py-3.5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs text-[#78716C]">
           <span>
             {savedArticles.length} Monograph{savedArticles.length === 1 ? '' : 's'} Bookmarked
@@ -100,20 +100,23 @@ export const SavedPage: React.FC<SavedPageProps> = ({
             {savedArticles.map((art) => (
               <div
                 key={art.id}
-                className="bg-[#F4F1EA] border border-[#E7E2D8] rounded-xl p-5 sm:p-6 transition-all hover:border-[#143D2B]/60"
+                className="bg-[#FAF8F5] border border-[#EAE5DC] rounded-xl p-5 sm:p-6 transition-all hover:border-[#143D2B]/60 hover:shadow-xs"
               >
                 <div className="flex flex-col md:flex-row gap-6 items-start">
-                  {/* Thumbnail */}
-                  <div
-                    onClick={() => onSelectArticle(art.slug)}
-                    className="w-full md:w-56 aspect-[16/10] rounded-lg overflow-hidden bg-[#EBE6DF] shrink-0 cursor-pointer border border-[#E7E2D8]"
+                  {/* Thumbnail - Opens in New Tab */}
+                  <a
+                    href={`/articles/${art.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full md:w-56 aspect-[16/10] rounded-xl overflow-hidden bg-[#EFECE6] shrink-0 cursor-pointer border border-[#EAE5DC] block group"
+                    title={`Open ${art.shortTitle} in a new tab`}
                   >
                     <img
                       src={art.image}
                       alt={art.imageAlt}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                     />
-                  </div>
+                  </a>
 
                   {/* Details & Workshop Note */}
                   <div className="flex-grow min-w-0 space-y-3">
@@ -137,11 +140,16 @@ export const SavedPage: React.FC<SavedPageProps> = ({
                       </button>
                     </div>
 
-                    <h3
-                      onClick={() => onSelectArticle(art.slug)}
-                      className="font-serif font-bold text-lg sm:text-xl text-[#1C1917] hover:text-[#143D2B] cursor-pointer transition-colors leading-snug"
-                    >
-                      {art.title}
+                    <h3 className="font-serif font-bold text-lg sm:text-xl text-[#1C1917] leading-snug">
+                      <a
+                        href={`/articles/${art.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-[#143D2B] transition-colors"
+                        title={`Open ${art.shortTitle} in a new tab`}
+                      >
+                        {art.title}
+                      </a>
                     </h3>
 
                     <p className="text-xs sm:text-sm text-[#44403C] line-clamp-2 leading-relaxed">
@@ -167,18 +175,21 @@ export const SavedPage: React.FC<SavedPageProps> = ({
                         onChange={(e) => handleSaveNote(art.id, e.target.value)}
                         placeholder="Add your own restoration notes, needle specs, or project clearances for this vehicle..."
                         rows={2}
-                        className="w-full text-xs p-2.5 bg-[#FBF9F5] border border-[#E7E2D8] rounded text-[#1C1917] focus:outline-none focus:border-[#143D2B] resize-y"
+                        className="w-full text-xs p-2.5 bg-[#F5F2EB] border border-[#E2DDD3] rounded-lg text-[#1C1917] focus:outline-none focus:border-[#143D2B] resize-y"
                       />
                     </div>
 
                     <div className="pt-2 flex justify-end">
-                      <button
-                        onClick={() => onSelectArticle(art.slug)}
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#143D2B] hover:underline cursor-pointer"
+                      <a
+                        href={`/articles/${art.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#143D2B] hover:underline"
+                        title={`Open ${art.shortTitle} in a new tab`}
                       >
                         <span>Open Technical Monograph</span>
                         <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>

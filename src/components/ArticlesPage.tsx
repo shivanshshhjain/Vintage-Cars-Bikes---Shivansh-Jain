@@ -50,12 +50,12 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({
   });
 
   return (
-    <div className="bg-[#FBF9F5] min-h-screen pb-24">
+    <div className="bg-[#FAF8F5] min-h-screen pb-24">
       {/* Header Banner */}
-      <section className="bg-[#F4F1EA] border-b border-[#E7E2D8] py-12 lg:py-16">
+      <section className="bg-[#F5F2EB] border-b border-[#EAE5DC] py-14 lg:py-18">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="text-xs uppercase tracking-widest font-sans font-semibold text-[#143D2B] mb-2 flex items-center gap-2">
+            <div className="text-[11px] uppercase tracking-widest font-sans font-semibold text-[#143D2B] mb-2.5 flex items-center gap-2">
               <Layers className="w-4 h-4 text-[#143D2B]" />
               <span>Dedicated Monograph Repository</span>
             </div>
@@ -70,11 +70,11 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({
       </section>
 
       {/* Filter, Search & Sort Control Strip */}
-      <div className="sticky top-20 z-30 bg-[#FBF9F5]/95 backdrop-blur-md border-b border-[#E7E2D8] py-4">
+      <div className="sticky top-20 z-30 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#EAE5DC] py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           
           {/* Category Tabs */}
-          <div className="flex items-center gap-1 p-1 bg-[#EBE6DF] rounded-lg overflow-x-auto">
+          <div className="flex items-center gap-1 p-1 bg-[#EAE5DC] rounded-lg overflow-x-auto">
             <button
               onClick={() => {
                 setCategory('all');
@@ -83,7 +83,7 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({
               }}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all whitespace-nowrap cursor-pointer ${
                 category === 'all'
-                  ? 'bg-[#143D2B] text-white shadow-xs'
+                  ? 'bg-[#143D2B] text-[#FAF8F5] shadow-xs'
                   : 'text-[#44403C] hover:text-[#1C1917]'
               }`}
             >
@@ -97,7 +97,7 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({
               }}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all whitespace-nowrap cursor-pointer ${
                 category === 'cars'
-                  ? 'bg-[#143D2B] text-white shadow-xs'
+                  ? 'bg-[#143D2B] text-[#FAF8F5] shadow-xs'
                   : 'text-[#44403C] hover:text-[#1C1917]'
               }`}
             >
@@ -111,7 +111,7 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({
               }}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all whitespace-nowrap cursor-pointer ${
                 category === 'motorcycles'
-                  ? 'bg-[#143D2B] text-white shadow-xs'
+                  ? 'bg-[#143D2B] text-[#FAF8F5] shadow-xs'
                   : 'text-[#44403C] hover:text-[#1C1917]'
               }`}
             >
@@ -128,7 +128,7 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search articles..."
-                className="w-full pl-9 pr-8 py-1.5 text-xs bg-[#F4F1EA] border border-[#E7E2D8] rounded-md text-[#1C1917] focus:outline-none focus:border-[#143D2B]"
+                className="w-full pl-9 pr-8 py-1.5 text-xs bg-[#F5F2EB] border border-[#E2DDD3] rounded-md text-[#1C1917] focus:outline-none focus:border-[#143D2B]"
               />
               {searchQuery && (
                 <button
@@ -145,7 +145,7 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-[#F4F1EA] border border-[#E7E2D8] rounded-md px-2.5 py-1.5 text-xs text-[#1C1917] focus:outline-none focus:border-[#143D2B] cursor-pointer"
+                className="bg-[#F5F2EB] border border-[#E2DDD3] rounded-md px-2.5 py-1.5 text-xs text-[#1C1917] focus:outline-none focus:border-[#143D2B] cursor-pointer"
               >
                 <option value="year-desc">Year: Newest to Oldest</option>
                 <option value="year-asc">Year: Oldest to Newest</option>

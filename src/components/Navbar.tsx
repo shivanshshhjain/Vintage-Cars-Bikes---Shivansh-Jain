@@ -106,24 +106,23 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Zone 2: Navigation Bar Classifications with Unique URLs (Opens each in a Different Tab) */}
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-xs xl:text-sm font-medium text-[#44403C]" aria-label="Main Classifications">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-medium text-[#44403C]" aria-label="Main Classifications">
             
             {/* Classification: Classic Automobiles */}
             <a
               href="/classification/classic-automobiles"
               target="_blank"
               rel="noopener noreferrer"
-              className={`hover:text-[#143D2B] transition-colors whitespace-nowrap inline-flex items-center gap-1.5 pb-1 ${
+              className={`hover:text-[#143D2B] transition-colors whitespace-nowrap inline-flex items-center gap-1.5 py-1 ${
                 currentPath === '/classification/classic-automobiles' || currentPath === '/automobiles'
                   ? 'text-[#143D2B] font-semibold border-b-2 border-[#143D2B]'
-                  : ''
+                  : 'text-[#44403C]'
               }`}
               title="Open Classic Automobiles Classification in a new browser tab"
               aria-label="Open Classic Automobiles Classification in a new tab"
             >
-              <Car className="w-3.5 h-3.5 text-[#143D2B]" />
+              <Car className="w-3.5 h-3.5 text-[#143D2B]/80" />
               <span>Automobiles (7)</span>
-              <ExternalLink className="w-3 h-3 text-[#A8A29E] hover:text-[#143D2B] opacity-70" />
             </a>
 
             {/* Classification: Vintage Motorcycles */}
@@ -131,17 +130,16 @@ export const Navbar: React.FC<NavbarProps> = ({
               href="/classification/vintage-motorcycles"
               target="_blank"
               rel="noopener noreferrer"
-              className={`hover:text-[#143D2B] transition-colors whitespace-nowrap inline-flex items-center gap-1.5 pb-1 ${
+              className={`hover:text-[#143D2B] transition-colors whitespace-nowrap inline-flex items-center gap-1.5 py-1 ${
                 currentPath === '/classification/vintage-motorcycles' || currentPath === '/motorcycles'
                   ? 'text-[#143D2B] font-semibold border-b-2 border-[#143D2B]'
-                  : ''
+                  : 'text-[#44403C]'
               }`}
               title="Open Vintage Motorcycles Classification in a new browser tab"
               aria-label="Open Vintage Motorcycles Classification in a new tab"
             >
-              <Bike className="w-3.5 h-3.5 text-[#143D2B]" />
+              <Bike className="w-3.5 h-3.5 text-[#143D2B]/80" />
               <span>Motorcycles (3)</span>
-              <ExternalLink className="w-3 h-3 text-[#A8A29E] hover:text-[#143D2B] opacity-70" />
             </a>
 
             {/* Classification: All Articles */}
@@ -149,36 +147,35 @@ export const Navbar: React.FC<NavbarProps> = ({
               href="/classification/all-articles"
               target="_blank"
               rel="noopener noreferrer"
-              className={`hover:text-[#143D2B] transition-colors whitespace-nowrap inline-flex items-center gap-1.5 pb-1 ${
+              className={`hover:text-[#143D2B] transition-colors whitespace-nowrap inline-flex items-center gap-1.5 py-1 ${
                 currentPath === '/classification/all-articles' || currentPath === '/articles'
                   ? 'text-[#143D2B] font-semibold border-b-2 border-[#143D2B]'
-                  : ''
+                  : 'text-[#44403C]'
               }`}
               title="Open All Articles Classification in a new browser tab"
               aria-label="Open All Articles Classification in a new tab"
             >
-              <Layers className="w-3.5 h-3.5 text-[#143D2B]" />
+              <Layers className="w-3.5 h-3.5 text-[#143D2B]/80" />
               <span>All Articles</span>
-              <ExternalLink className="w-3 h-3 text-[#A8A29E] hover:text-[#143D2B] opacity-70" />
             </a>
 
             {/* Classification Dropdown Selector for All Categories */}
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
-                className="flex items-center gap-1 text-xs font-semibold text-[#143D2B] bg-[#EBE6DF]/70 hover:bg-[#EBE6DF] px-2.5 py-1.5 rounded border border-[#E7E2D8] transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 text-xs font-semibold text-[#143D2B] hover:text-[#1B5238] bg-[#F2EFE8] hover:bg-[#EBE6DF] px-3 py-1.5 rounded-md border border-[#E2DDD3] transition-colors cursor-pointer"
                 aria-expanded={isDropdownOpen}
                 aria-haspopup="true"
-                title="Choose a classification to open in a new tab"
+                title="Browse all journal classifications (opens in new tab)"
               >
                 <span>Classifications</span>
-                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute top-full right-0 mt-2 w-80 bg-[#FBF9F5] rounded-lg shadow-xl border border-[#E7E2D8] py-2 z-50">
-                  <div className="px-3.5 py-2 border-b border-[#E7E2D8] text-[11px] font-mono uppercase tracking-wider text-[#78716C]">
-                    Choose Classification (Opens in New Tab)
+                <div className="absolute top-full right-0 mt-2 w-80 bg-[#FAF8F5] rounded-xl shadow-lg border border-[#E2DDD3] py-2 z-50 animate-in fade-in-50 duration-150">
+                  <div className="px-4 py-2 border-b border-[#EAE5DC] text-[10px] font-mono uppercase tracking-widest text-[#78716C]">
+                    Choose Classification · Opens in New Tab
                   </div>
                   {CLASSIFICATIONS.map((c) => {
                     const Icon = c.icon;
@@ -189,10 +186,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => setIsDropdownOpen(false)}
-                        className="flex items-start gap-3 px-3.5 py-2.5 hover:bg-[#F4F1EA] transition-colors group cursor-pointer"
+                        className="flex items-start gap-3 px-4 py-3 hover:bg-[#F2EFE8] transition-colors group cursor-pointer"
                         title={`Open ${c.name} in a new tab`}
                       >
-                        <div className="p-1.5 rounded bg-[#EBE6DF] text-[#143D2B] shrink-0 mt-0.5 group-hover:bg-[#143D2B] group-hover:text-white transition-colors">
+                        <div className="p-2 rounded-md bg-[#EBE6DF] text-[#143D2B] shrink-0 mt-0.5 group-hover:bg-[#143D2B] group-hover:text-[#FBF9F5] transition-colors">
                           <Icon className="w-4 h-4" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -200,7 +197,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                             <span className="text-xs font-semibold text-[#1C1917] group-hover:text-[#143D2B]">
                               {c.name}
                             </span>
-                            <span className="text-[10px] font-mono text-[#78716C] bg-[#EBE6DF] px-1.5 py-0.2 rounded">
+                            <span className="text-[10px] font-mono text-[#66615B] bg-[#EBE6DF] px-1.5 py-0.5 rounded">
                               {c.countLabel}
                             </span>
                           </div>
@@ -208,7 +205,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                             {c.description}
                           </p>
                         </div>
-                        <ExternalLink className="w-3.5 h-3.5 text-[#A8A29E] group-hover:text-[#143D2B] shrink-0 mt-1" />
+                        <ExternalLink className="w-3.5 h-3.5 text-[#A8A29E] group-hover:text-[#143D2B] shrink-0 mt-1 opacity-70 group-hover:opacity-100" />
                       </a>
                     );
                   })}
@@ -221,16 +218,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               href="/classification/archival-resources"
               target="_blank"
               rel="noopener noreferrer"
-              className={`hover:text-[#143D2B] transition-colors whitespace-nowrap inline-flex items-center gap-1.5 pb-1 ${
+              className={`hover:text-[#143D2B] transition-colors whitespace-nowrap inline-flex items-center gap-1.5 py-1 ${
                 currentPath === '/classification/archival-resources' || currentPath === '/resources'
                   ? 'text-[#143D2B] font-semibold border-b-2 border-[#143D2B]'
-                  : ''
+                  : 'text-[#44403C]'
               }`}
               title="Open Archival Resources in a new browser tab"
               aria-label="Open Archival Resources in a new tab"
             >
               <span>Archives</span>
-              <ExternalLink className="w-3 h-3 text-[#A8A29E] hover:text-[#143D2B] opacity-70" />
             </a>
 
             {/* Classification: Saved Reading List */}
@@ -238,10 +234,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               href="/classification/reading-list"
               target="_blank"
               rel="noopener noreferrer"
-              className={`hover:text-[#143D2B] transition-colors whitespace-nowrap inline-flex items-center gap-1.5 pb-1 ${
+              className={`hover:text-[#143D2B] transition-colors whitespace-nowrap inline-flex items-center gap-1.5 py-1 ${
                 currentPath === '/classification/reading-list' || currentPath === '/saved'
                   ? 'text-[#143D2B] font-semibold border-b-2 border-[#143D2B]'
-                  : ''
+                  : 'text-[#44403C]'
               }`}
               title="Open Saved Reading Desk in a new browser tab"
               aria-label="Open Saved Reading Desk in a new tab"
@@ -252,7 +248,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                   {savedCount}
                 </span>
               )}
-              <ExternalLink className="w-3 h-3 text-[#A8A29E] hover:text-[#143D2B] opacity-70" />
             </a>
           </nav>
 

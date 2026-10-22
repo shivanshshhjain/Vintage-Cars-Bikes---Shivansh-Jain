@@ -66,11 +66,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl bg-[#FBF9F5] rounded-xl shadow-2xl border border-[#E7E2D8] overflow-hidden flex flex-col max-h-[80vh]"
+        className="w-full max-w-2xl bg-[#FAF8F5] rounded-xl shadow-2xl border border-[#EAE5DC] overflow-hidden flex flex-col max-h-[80vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[#E7E2D8] bg-[#F4F1EA]">
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[#EAE5DC] bg-[#F5F2EB]">
           <Search className="w-5 h-5 text-[#143D2B] shrink-0" />
           <input
             ref={inputRef}
@@ -98,7 +98,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         </div>
 
         {/* Results Count & Quick Filter Suggestions */}
-        <div className="px-4 py-2 border-b border-[#E7E2D8] bg-[#FAF8F3] flex items-center justify-between text-xs text-[#78716C]">
+        <div className="px-4 py-2 border-b border-[#EAE5DC] bg-[#FAF8F5] flex items-center justify-between text-xs text-[#78716C]">
           <span>
             {cleanQuery ? `${results.length} matches found` : 'All 10 Journal Articles'}
           </span>
@@ -128,18 +128,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         </div>
 
         {/* Results List */}
-        <div className="overflow-y-auto divide-y divide-[#E7E2D8] p-2">
+        <div className="overflow-y-auto divide-y divide-[#EAE5DC] p-2">
           {results.length > 0 ? (
             results.map((art) => (
-              <div
+              <a
                 key={art.id}
-                onClick={() => {
-                  onSelectArticle(art.slug);
-                  onClose();
-                }}
-                className="group flex items-center gap-4 p-3 rounded-lg hover:bg-[#F4F1EA] cursor-pointer transition-colors"
+                href={`/articles/${art.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={onClose}
+                className="group flex items-center gap-4 p-3 rounded-lg hover:bg-[#F5F2EB] cursor-pointer transition-colors"
+                title={`Open ${art.shortTitle} in a new tab`}
               >
-                <div className="w-16 h-12 rounded bg-[#EBE6DF] overflow-hidden shrink-0 border border-[#E7E2D8]">
+                <div className="w-16 h-12 rounded bg-[#EBE6DF] overflow-hidden shrink-0 border border-[#EAE5DC]">
                   <img
                     src={art.image}
                     alt={art.imageAlt}
@@ -161,8 +162,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                     {art.engine}
                   </p>
                 </div>
-                <ArrowRight className="w-4 h-4 text-[#A8A29E] group-hover:text-[#143D2B] group-hover:translate-x-1 transition-all shrink-0" />
-              </div>
+                <div className="flex items-center gap-1 text-xs text-[#143D2B] opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                  <span>Open</span>
+                  <ArrowRight className="w-4 h-4 text-[#143D2B] group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </a>
             ))
           ) : (
             <div className="py-12 text-center text-[#78716C] space-y-2">

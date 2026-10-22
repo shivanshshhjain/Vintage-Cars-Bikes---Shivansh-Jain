@@ -63,43 +63,45 @@ export const SavedDrawer: React.FC<SavedDrawerProps> = ({
                 key={art.id}
                 className="group p-3.5 rounded-lg bg-[#F4F1EA] border border-[#E7E2D8] hover:border-[#143D2B]/50 transition-colors flex gap-3.5 items-start"
               >
-                <div
-                  className="w-20 h-16 rounded overflow-hidden bg-[#EBE6DF] shrink-0 cursor-pointer"
-                  onClick={() => {
-                    onSelectArticle(art.slug);
-                    onClose();
-                  }}
+                <a
+                  href={`/articles/${art.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-20 h-16 rounded overflow-hidden bg-[#EBE6DF] shrink-0 cursor-pointer block"
+                  title={`Open ${art.shortTitle} in a new tab`}
                 >
                   <img
                     src={art.image}
                     alt={art.imageAlt}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
-                </div>
+                </a>
                 <div className="flex-grow min-w-0">
                   <div className="text-[10px] text-[#78716C] mb-0.5">
                     <span className="font-semibold text-[#143D2B]">{art.categoryLabel}</span> · <span>{art.readTime}</span>
                   </div>
-                  <h4
-                    onClick={() => {
-                      onSelectArticle(art.slug);
-                      onClose();
-                    }}
-                    className="font-serif font-bold text-xs text-[#1C1917] group-hover:text-[#143D2B] cursor-pointer line-clamp-2 transition-colors"
-                  >
-                    {art.shortTitle}
+                  <h4 className="font-serif font-bold text-xs text-[#1C1917] line-clamp-2 transition-colors">
+                    <a
+                      href={`/articles/${art.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#143D2B]"
+                      title={`Open ${art.shortTitle} in a new tab`}
+                    >
+                      {art.shortTitle}
+                    </a>
                   </h4>
                   <div className="mt-2 flex items-center justify-between text-[11px]">
-                    <button
-                      onClick={() => {
-                        onSelectArticle(art.slug);
-                        onClose();
-                      }}
+                    <a
+                      href={`/articles/${art.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-[#143D2B] font-semibold hover:underline inline-flex items-center gap-1 cursor-pointer"
+                      title={`Open ${art.shortTitle} in a new tab`}
                     >
-                      <span>Read now</span>
+                      <span>Read monograph</span>
                       <ArrowRight className="w-3 h-3" />
-                    </button>
+                    </a>
                     <button
                       onClick={() => onRemoveBookmark(art.id)}
                       className="text-[#A8A29E] hover:text-red-700 transition-colors cursor-pointer"

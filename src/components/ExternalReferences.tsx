@@ -49,9 +49,9 @@ export const ExternalReferences: React.FC<ExternalReferencesProps> = ({
   return (
     <section
       aria-label="Authoritative Technical References & External Archives"
-      className="mt-14 bg-[#F4F1EA] border border-[#E7E2D8] rounded-xl p-6 sm:p-8"
+      className="mt-14 bg-[#F5F2EB] border border-[#EAE5DC] rounded-xl p-6 sm:p-8"
     >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#E7E2D8] mb-6 gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#E2DDD3] mb-6 gap-2">
         <div>
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#143D2B] mb-1">
             <Compass className="w-4 h-4 text-[#143D2B]" />
@@ -61,7 +61,7 @@ export const ExternalReferences: React.FC<ExternalReferencesProps> = ({
             Historical Societies, Registries & Factory Archives
           </h3>
         </div>
-        <span className="text-xs font-mono text-[#78716C] bg-[#EBE6DF] px-2.5 py-1 rounded self-start sm:self-auto">
+        <span className="text-[10px] font-mono uppercase tracking-wider text-[#66615B] bg-[#EBE6DF] px-2.5 py-1 rounded self-start sm:self-auto">
           VERIFIED EXTERNAL SOURCES
         </span>
       </div>
@@ -77,15 +77,15 @@ export const ExternalReferences: React.FC<ExternalReferencesProps> = ({
             href={ref.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group block p-4 bg-[#FBF9F5] border border-[#E7E2D8] hover:border-[#143D2B] rounded-lg transition-all hover:shadow-xs"
+            className="group block p-4.5 bg-[#FAF8F5] border border-[#E2DDD3] hover:border-[#143D2B] rounded-xl transition-all hover:shadow-xs"
           >
-            <div className="flex items-center justify-between text-xs text-[#78716C] mb-1.5">
-              <span className="text-[11px] font-mono text-[#143D2B] font-semibold">
+            <div className="flex items-center justify-between text-xs text-[#78716C] mb-2">
+              <span className="text-[10px] font-mono text-[#143D2B] font-semibold uppercase tracking-wider">
                 {ref.category.toUpperCase()}
               </span>
-              <span className="text-[11px] text-[#A8A29E] group-hover:text-[#143D2B] flex items-center gap-1 font-medium">
-                <span>Visit External Archive</span>
-                <ExternalLink className="w-3 h-3" />
+              <span className="text-[11px] text-[#8C867E] group-hover:text-[#143D2B] flex items-center gap-1 font-medium transition-colors">
+                <span>Visit Archive</span>
+                <ExternalLink className="w-3 h-3 text-[#143D2B]" />
               </span>
             </div>
 

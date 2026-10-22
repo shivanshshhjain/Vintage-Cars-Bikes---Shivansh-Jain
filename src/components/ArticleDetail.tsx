@@ -102,9 +102,9 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
   const relatedArticles = ARTICLES.filter((a) => a.id !== article.id).slice(0, 3);
 
   return (
-    <div className="bg-[#FBF9F5] min-h-screen pb-24">
+    <div className="bg-[#FAF8F5] min-h-screen pb-24">
       {/* Editorial Breadcrumbs & Back Bar */}
-      <div className="border-b border-[#E7E2D8] bg-[#F4F1EA]">
+      <div className="border-b border-[#EAE5DC] bg-[#F5F2EB]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between text-xs text-[#78716C]">
           <nav className="flex items-center gap-1.5 overflow-x-auto whitespace-nowrap" aria-label="Breadcrumb">
             <a
@@ -181,10 +181,10 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
           </p>
 
           {/* Quick-Jump In-Page Anchor Navigation Strip */}
-          <div className="p-3.5 bg-[#F4F1EA] border border-[#E7E2D8] rounded-lg mb-6">
-            <div className="text-[11px] font-mono uppercase tracking-wider text-[#78716C] mb-2 font-semibold flex items-center gap-1.5">
+          <div className="p-4 bg-[#F5F2EB] border border-[#EAE5DC] rounded-xl mb-6">
+            <div className="text-[10px] font-mono uppercase tracking-widest text-[#78716C] mb-2.5 font-semibold flex items-center gap-1.5">
               <Link2 className="w-3.5 h-3.5 text-[#143D2B]" />
-              <span>Direct In-Article Anchor Navigation</span>
+              <span>In-Article Anchor Index</span>
             </div>
             <div className="flex flex-wrap gap-2 text-xs">
               {article.sections.map((sec) => (
@@ -195,9 +195,9 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                     e.preventDefault();
                     handleNavigateSection(sec.id);
                   }}
-                  className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#FBF9F5] border border-[#E7E2D8] hover:border-[#143D2B] text-[#1C1917] hover:text-[#143D2B] rounded transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF8F5] border border-[#E2DDD3] hover:border-[#143D2B] text-[#1C1917] hover:text-[#143D2B] rounded-md transition-colors"
                 >
-                  <span className="text-[#143D2B] font-mono font-bold">#</span>
+                  <span className="text-[#143D2B] font-mono text-[11px] font-semibold">#</span>
                   <span className="font-medium">{sec.title}</span>
                 </a>
               ))}
@@ -355,13 +355,10 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
 
                         {/* Contextual Anchor Link placed directly below this specific sentence */}
                         {contextualAnchor && (
-                          <div className="my-3 p-3 bg-[#FAF8F3] border border-[#E7E2D8] hover:border-[#143D2B]/50 rounded-md transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-                            <div className="flex items-start sm:items-center gap-2 text-[#44403C]">
-                              <Link2 className="w-3.5 h-3.5 text-[#143D2B] shrink-0 mt-0.5 sm:mt-0" />
-                              <div>
-                                <span className="text-[#78716C] block sm:inline">Reference for Sentence: </span>
-                                <span className="font-serif italic text-[#1C1917]">"{sentenceExcerpt}"</span>
-                              </div>
+                          <div className="my-2.5 pt-1.5 pb-1 border-l-2 border-[#143D2B]/50 pl-3.5 text-xs text-[#66615B] flex flex-wrap items-center justify-between gap-2 bg-[#F6F3EC]/50 rounded-r-md transition-colors hover:bg-[#F6F3EC]">
+                            <div className="flex items-center gap-1.5 min-w-0">
+                              <span className="font-mono text-[#143D2B] font-semibold text-[11px] shrink-0">↳ Reference:</span>
+                              <span className="font-serif italic text-[#44403C] truncate max-w-xs sm:max-w-md">"{sentenceExcerpt}"</span>
                             </div>
                             <a
                               href={`#${contextualAnchor.targetId}`}
@@ -369,7 +366,7 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                                 e.preventDefault();
                                 handleNavigateSection(contextualAnchor!.targetId);
                               }}
-                              className="inline-flex items-center gap-1 font-semibold text-[#143D2B] hover:underline shrink-0 bg-[#FBF9F5] px-2.5 py-1 rounded border border-[#E7E2D8]"
+                              className="inline-flex items-center gap-1 font-semibold text-[#143D2B] hover:text-[#1B5238] hover:underline shrink-0"
                             >
                               <span>{contextualAnchor.label}</span>
                               <ArrowDownRight className="w-3.5 h-3.5" />
@@ -383,9 +380,9 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
 
                 {/* Specifications Grid if present */}
                 {section.id === 'specifications' && article.specs.length > 0 && (
-                  <div className="mt-8 bg-[#F4F1EA] border border-[#E7E2D8] rounded-lg p-5">
-                    <div className="flex items-center justify-between pb-2 border-b border-[#E7E2D8] mb-3">
-                      <h4 className="font-serif font-bold text-sm text-[#1C1917]">
+                  <div className="mt-8 bg-[#F5F2EB] border border-[#EAE5DC] rounded-xl p-6">
+                    <div className="flex items-center justify-between pb-3 border-b border-[#E2DDD3] mb-4">
+                      <h4 className="font-serif font-bold text-base text-[#1C1917]">
                         Archival Engineering Invariants & Clearances
                       </h4>
                       <a
@@ -400,10 +397,10 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                         <ArrowDownRight className="w-3 h-3" />
                       </a>
                     </div>
-                    <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 text-xs">
+                    <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-xs">
                       {article.specs.map((spec, sIdx) => (
-                        <div key={sIdx} className="flex justify-between py-1 border-b border-[#E7E2D8]/60">
-                          <dt className="text-[#78716C]">{spec.label}</dt>
+                        <div key={sIdx} className="flex justify-between py-1 border-b border-[#E2DDD3]/60">
+                          <dt className="text-[#66615B]">{spec.label}</dt>
                           <dd className="font-mono font-medium text-[#1C1917] text-right">{spec.value}</dd>
                         </div>
                       ))}
@@ -413,9 +410,9 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
 
                 {/* Bullet Points if present */}
                 {section.bulletPoints && section.bulletPoints.length > 0 && (
-                  <ul className="mt-5 space-y-2 text-sm text-[#44403C]">
+                  <ul className="mt-6 space-y-2.5 text-sm text-[#44403C]">
                     {section.bulletPoints.map((point, ptIdx) => (
-                      <li key={ptIdx} className="flex items-start gap-2.5">
+                      <li key={ptIdx} className="flex items-start gap-3">
                         <CheckCircle className="w-4 h-4 text-[#143D2B] shrink-0 mt-0.5" />
                         <span>{point}</span>
                       </li>
@@ -426,7 +423,7 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                 {/* Paragraphs in Question-and-Answer format with deep anchor links */}
                 {section.qaList && section.qaList.length > 0 && (
                   <div className="mt-8 space-y-4">
-                    <div className="flex items-center justify-between text-xs font-semibold text-[#143D2B] uppercase tracking-wider pb-2 border-b border-[#E7E2D8]">
+                    <div className="flex items-center justify-between text-xs font-semibold text-[#143D2B] uppercase tracking-wider pb-2 border-b border-[#EAE5DC]">
                       <div className="flex items-center gap-2">
                         <HelpCircle className="w-4 h-4" />
                         <span>Procedural Question & Answer Format ({section.qaList.length} Items)</span>
@@ -443,10 +440,10 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                           <div
                             key={qaIdx}
                             id={qaAnchorId}
-                            className="scroll-mt-28 bg-[#F4F1EA] border border-[#E7E2D8] rounded-lg p-5 text-sm"
+                            className="scroll-mt-28 bg-[#F5F2EB] border border-[#EAE5DC] rounded-xl p-5 sm:p-6 text-sm"
                           >
                             {/* Deep Anchor Bar directly below Question Title */}
-                            <div className="flex items-center justify-between text-[11px] text-[#78716C] mb-2 pb-1.5 border-b border-[#E7E2D8]/70">
+                            <div className="flex items-center justify-between text-[11px] text-[#78716C] mb-2 pb-2 border-b border-[#E2DDD3]">
                               <span className="font-mono font-bold text-[#143D2B]">
                                 PROCEDURAL ANCHOR #{qaIdx + 1}
                               </span>
@@ -480,7 +477,7 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                                 {qa.answer}
                               </p>
                               {qa.proceduralTip && (
-                                <div className="mt-2.5 pt-2 border-t border-[#E7E2D8] text-xs text-[#78716C] italic flex items-start gap-2">
+                                <div className="mt-3 pt-2.5 border-t border-[#E2DDD3] text-xs text-[#66615B] italic flex items-start gap-2">
                                   <span className="font-semibold text-[#143D2B] not-italic">Workshop Tip:</span>
                                   <span>{qa.proceduralTip}</span>
                                 </div>
@@ -534,36 +531,43 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
         </div>
 
         {/* Related Articles Strip */}
-        <section className="mt-20 pt-12 border-t border-[#E7E2D8]" aria-label="Related Articles">
+        <section className="mt-20 pt-12 border-t border-[#EAE5DC]" aria-label="Related Articles">
           <div className="flex items-center justify-between mb-6">
             <h3 className="font-serif text-2xl font-bold text-[#1C1917]">
               Related Technical Monographs
             </h3>
-            <button
-              onClick={onNavigateHome}
-              className="text-xs font-semibold text-[#143D2B] hover:underline cursor-pointer"
+            <a
+              href="/classification/all-articles"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-semibold text-[#143D2B] hover:underline inline-flex items-center gap-1 cursor-pointer"
+              title="Open Complete Catalog in a new tab"
             >
-              Browse Complete Catalog (10) →
-            </button>
+              <span>Browse Complete Catalog (10)</span>
+              <ExternalLink className="w-3 h-3 text-[#143D2B]" />
+            </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedArticles.map((rel) => (
-              <div
+              <a
                 key={rel.id}
-                onClick={() => onSelectArticle(rel.slug)}
-                className="group cursor-pointer bg-[#F4F1EA] border border-[#E7E2D8] hover:border-[#143D2B] rounded-lg p-4 transition-all"
+                href={`/articles/${rel.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group cursor-pointer bg-[#FAF8F5] border border-[#EAE5DC] hover:border-[#143D2B] rounded-xl p-4.5 transition-all block hover:shadow-xs"
+                title={`Open ${rel.shortTitle} in a new tab`}
               >
-                <div className="aspect-[16/9] rounded overflow-hidden bg-[#EBE6DF] mb-3">
+                <div className="aspect-[16/9] rounded-lg overflow-hidden bg-[#EFECE6] mb-3 relative">
                   <img
                     src={rel.image}
                     alt={rel.imageAlt}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
                   />
                 </div>
-                <div className="text-[11px] text-[#78716C] mb-1">
-                  <span>{rel.categoryLabel}</span> · <span>{rel.year}</span>
+                <div className="text-[11px] text-[#66615B] mb-1 font-medium">
+                  <span className="text-[#143D2B] font-semibold uppercase">{rel.categoryLabel}</span> · <span>{rel.year}</span>
                 </div>
                 <h4 className="font-serif font-bold text-sm text-[#1C1917] group-hover:text-[#143D2B] line-clamp-2 transition-colors mb-2">
                   {rel.shortTitle}
@@ -571,7 +575,7 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
                 <p className="text-xs text-[#44403C] line-clamp-2 leading-relaxed">
                   {rel.excerpt}
                 </p>
-              </div>
+              </a>
             ))}
           </div>
         </section>

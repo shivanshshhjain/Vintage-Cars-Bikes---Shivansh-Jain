@@ -81,36 +81,52 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-2 text-xs text-[#D6CEBE]">
               <li>
-                <button
-                  onClick={() => onSelectArticle('1961-jaguar-e-type-rebuild')}
-                  className="hover:text-white transition-colors text-left line-clamp-1 cursor-pointer"
+                <a
+                  href="/articles/1961-jaguar-e-type-rebuild"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors text-left line-clamp-1 cursor-pointer inline-flex items-center gap-1.5"
+                  title="Open 1961 Jaguar E-Type in a new tab"
                 >
-                  1961 Jaguar E-Type 3.8 SU Carb Rebuild
-                </button>
+                  <span>1961 Jaguar E-Type 3.8 SU Carb Rebuild</span>
+                  <span className="text-[10px] text-[#A3B899] font-mono">↗</span>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => onSelectArticle('1973-porsche-911-carrera-rs-mfi')}
-                  className="hover:text-white transition-colors text-left line-clamp-1 cursor-pointer"
+                <a
+                  href="/articles/1973-porsche-911-carrera-rs-mfi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors text-left line-clamp-1 cursor-pointer inline-flex items-center gap-1.5"
+                  title="Open 1973 Porsche 911 RS in a new tab"
                 >
-                  1973 Porsche 911 RS 2.7 MFI Calibration
-                </button>
+                  <span>1973 Porsche 911 RS 2.7 MFI Calibration</span>
+                  <span className="text-[10px] text-[#A3B899] font-mono">↗</span>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => onSelectArticle('1974-norton-commando-850')}
-                  className="hover:text-white transition-colors text-left line-clamp-1 cursor-pointer"
+                <a
+                  href="/articles/1974-norton-commando-850"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors text-left line-clamp-1 cursor-pointer inline-flex items-center gap-1.5"
+                  title="Open 1974 Norton Commando in a new tab"
                 >
-                  1974 Norton Commando Isolastic Mounts
-                </button>
+                  <span>1974 Norton Commando Isolastic Mounts</span>
+                  <span className="text-[10px] text-[#A3B899] font-mono">↗</span>
+                </a>
               </li>
               <li>
-                <button
-                  onClick={() => onSelectArticle('1972-moto-guzzi-v7-sport')}
-                  className="hover:text-white transition-colors text-left line-clamp-1 cursor-pointer"
+                <a
+                  href="/articles/1972-moto-guzzi-v7-sport"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors text-left line-clamp-1 cursor-pointer inline-flex items-center gap-1.5"
+                  title="Open 1972 Moto Guzzi V7 Sport in a new tab"
                 >
-                  1972 Moto Guzzi V7 Sport Bevel Shaft Setup
-                </button>
+                  <span>1972 Moto Guzzi V7 Sport Bevel Shaft Setup</span>
+                  <span className="text-[10px] text-[#A3B899] font-mono">↗</span>
+                </a>
               </li>
             </ul>
           </div>

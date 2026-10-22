@@ -34,12 +34,12 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ onSelectArticle })
   });
 
   return (
-    <div className="bg-[#FBF9F5] min-h-screen pb-24">
+    <div className="bg-[#FAF8F5] min-h-screen pb-24">
       {/* Header Banner */}
-      <section className="bg-[#F4F1EA] border-b border-[#E7E2D8] py-12 lg:py-16">
+      <section className="bg-[#F5F2EB] border-b border-[#EAE5DC] py-14 lg:py-18">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <div className="text-xs uppercase tracking-widest font-sans font-semibold text-[#143D2B] mb-2 flex items-center gap-2">
+            <div className="text-[11px] uppercase tracking-widest font-sans font-semibold text-[#143D2B] mb-2.5 flex items-center gap-2">
               <Compass className="w-4 h-4 text-[#143D2B]" />
               <span>Archival Research Room</span>
             </div>
@@ -54,14 +54,14 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ onSelectArticle })
       </section>
 
       {/* Control Bar */}
-      <div className="sticky top-20 z-30 bg-[#FBF9F5]/95 backdrop-blur-md border-b border-[#E7E2D8] py-4">
+      <div className="sticky top-20 z-30 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#EAE5DC] py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           
-          <div className="flex items-center gap-1 p-1 bg-[#EBE6DF] rounded-lg overflow-x-auto text-xs">
+          <div className="flex items-center gap-1 p-1 bg-[#EAE5DC] rounded-lg overflow-x-auto text-xs">
             <button
               onClick={() => setFilterCat('all')}
               className={`px-3 py-1.5 rounded-md font-medium transition-all whitespace-nowrap cursor-pointer ${
-                filterCat === 'all' ? 'bg-[#143D2B] text-white shadow-xs' : 'text-[#44403C] hover:text-[#1C1917]'
+                filterCat === 'all' ? 'bg-[#143D2B] text-[#FAF8F5] shadow-xs' : 'text-[#44403C] hover:text-[#1C1917]'
               }`}
             >
               All Archives ({allRefs.length})
@@ -69,7 +69,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ onSelectArticle })
             <button
               onClick={() => setFilterCat('Factory Manual')}
               className={`px-3 py-1.5 rounded-md font-medium transition-all whitespace-nowrap cursor-pointer ${
-                filterCat === 'Factory Manual' ? 'bg-[#143D2B] text-white shadow-xs' : 'text-[#44403C] hover:text-[#1C1917]'
+                filterCat === 'Factory Manual' ? 'bg-[#143D2B] text-[#FAF8F5] shadow-xs' : 'text-[#44403C] hover:text-[#1C1917]'
               }`}
             >
               Factory Manuals
@@ -77,7 +77,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ onSelectArticle })
             <button
               onClick={() => setFilterCat('Historical Archive')}
               className={`px-3 py-1.5 rounded-md font-medium transition-all whitespace-nowrap cursor-pointer ${
-                filterCat === 'Historical Archive' ? 'bg-[#143D2B] text-white shadow-xs' : 'text-[#44403C] hover:text-[#1C1917]'
+                filterCat === 'Historical Archive' ? 'bg-[#143D2B] text-[#FAF8F5] shadow-xs' : 'text-[#44403C] hover:text-[#1C1917]'
               }`}
             >
               Historical Archives
@@ -85,7 +85,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ onSelectArticle })
             <button
               onClick={() => setFilterCat('Technical Blueprint')}
               className={`px-3 py-1.5 rounded-md font-medium transition-all whitespace-nowrap cursor-pointer ${
-                filterCat === 'Technical Blueprint' ? 'bg-[#143D2B] text-white shadow-xs' : 'text-[#44403C] hover:text-[#1C1917]'
+                filterCat === 'Technical Blueprint' ? 'bg-[#143D2B] text-[#FAF8F5] shadow-xs' : 'text-[#44403C] hover:text-[#1C1917]'
               }`}
             >
               Blueprints
@@ -93,7 +93,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ onSelectArticle })
             <button
               onClick={() => setFilterCat('Registry')}
               className={`px-3 py-1.5 rounded-md font-medium transition-all whitespace-nowrap cursor-pointer ${
-                filterCat === 'Registry' ? 'bg-[#143D2B] text-white shadow-xs' : 'text-[#44403C] hover:text-[#1C1917]'
+                filterCat === 'Registry' ? 'bg-[#143D2B] text-[#FAF8F5] shadow-xs' : 'text-[#44403C] hover:text-[#1C1917]'
               }`}
             >
               Registries
@@ -107,7 +107,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ onSelectArticle })
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search references..."
-              className="w-full pl-9 pr-3 py-1.5 text-xs bg-[#F4F1EA] border border-[#E7E2D8] rounded-md text-[#1C1917] focus:outline-none focus:border-[#143D2B]"
+              className="w-full pl-9 pr-3 py-1.5 text-xs bg-[#F5F2EB] border border-[#E2DDD3] rounded-md text-[#1C1917] focus:outline-none focus:border-[#143D2B]"
             />
           </div>
         </div>
@@ -119,11 +119,11 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ onSelectArticle })
           {filtered.map((item, idx) => (
             <div
               key={idx}
-              className="bg-[#F4F1EA] border border-[#E7E2D8] rounded-xl p-5 flex flex-col justify-between hover:border-[#143D2B] transition-all"
+              className="bg-[#FAF8F5] border border-[#EAE5DC] rounded-xl p-5 sm:p-6 flex flex-col justify-between hover:border-[#143D2B] transition-all hover:shadow-xs"
             >
               <div>
                 <div className="flex items-center justify-between text-xs text-[#78716C] mb-2">
-                  <span className="font-mono text-[#143D2B] font-semibold text-[11px]">
+                  <span className="font-mono text-[#143D2B] font-semibold text-[10px] uppercase tracking-wider">
                     {item.ref.category.toUpperCase()}
                   </span>
                   <span className="flex items-center gap-1 text-[11px] text-[#A8A29E]">
@@ -146,13 +146,16 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ onSelectArticle })
               </div>
 
               <div className="pt-3 border-t border-[#E7E2D8] flex items-center justify-between text-xs">
-                <button
-                  onClick={() => onSelectArticle(item.articleSlug)}
-                  className="text-[#78716C] hover:text-[#143D2B] truncate max-w-[150px] text-left cursor-pointer"
-                  title={`Read Monograph: ${item.articleTitle}`}
+                <a
+                  href={`/articles/${item.articleSlug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#78716C] hover:text-[#143D2B] truncate max-w-[150px] text-left cursor-pointer inline-flex items-center gap-1 hover:underline"
+                  title={`Open Monograph: ${item.articleTitle} in a new tab`}
                 >
-                  In: {item.articleTitle}
-                </button>
+                  <span>In: {item.articleTitle}</span>
+                  <ExternalLink className="w-2.5 h-2.5 text-[#A8A29E]" />
+                </a>
                 <a
                   href={item.ref.url}
                   target="_blank"

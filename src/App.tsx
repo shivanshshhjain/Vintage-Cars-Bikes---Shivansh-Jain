@@ -294,89 +294,71 @@ export default function App() {
     return (
       <div>
         {/* Curatorial Header Banner */}
-        <section className="border-b border-[#E7E2D8] bg-[#F4F1EA] py-12 lg:py-16">
+        <section className="border-b border-[#EAE5DC] bg-[#F5F2EB] py-14 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
-              <div className="text-xs uppercase tracking-widest font-sans font-semibold text-[#143D2B] mb-3">
+              <div className="text-[11px] uppercase tracking-widest font-sans font-semibold text-[#143D2B] mb-3">
                 VOLUME XI · THE RESTORATION & TUNING ISSUE
               </div>
-              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1C1917] mb-5 leading-[1.12]">
+              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#1C1917] mb-5 leading-[1.14]">
                 The Heritage of Internal Combustion.
               </h1>
               <p className="text-base sm:text-lg text-[#44403C] leading-relaxed font-serif">
                 Ten definitive technical monographs spanning post-war sports car engineering and iconic British and Italian parallel-twins. Each article contains verified factory clearances, step-by-step rebuild procedures, and diagnostic Q&A for the dedicated restorer.
               </p>
 
-              {/* Classification Cards Quick Jump - Opens in New Browser Tab */}
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {/* Classification Index Quick Jump - Refined Curatorial Index Strip (Opens in New Browser Tab) */}
+              <div className="mt-8 pt-6 border-t border-[#E2DDD3] flex flex-wrap items-center gap-2.5 text-xs">
+                <span className="text-[#66615B] font-mono text-[11px] uppercase tracking-wider mr-1">
+                  Exhibits:
+                </span>
                 <a
                   href="/classification/classic-automobiles"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group p-3.5 bg-[#FBF9F5] border border-[#E7E2D8] hover:border-[#143D2B] rounded-lg transition-all"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FAF8F5] border border-[#E2DDD3] hover:border-[#143D2B] text-[#1C1917] hover:text-[#143D2B] rounded-md transition-all font-medium"
                   title="Open Classic Automobiles Classification in a new browser tab"
                 >
-                  <div className="flex items-center justify-between text-xs text-[#143D2B] font-semibold mb-1">
-                    <span className="flex items-center gap-1.5">
-                      <Car className="w-3.5 h-3.5" />
-                      <span>Classic Automobiles</span>
-                    </span>
-                    <ExternalLink className="w-3.5 h-3.5 text-[#A8A29E] group-hover:text-[#143D2B]" />
-                  </div>
-                  <p className="text-[11px] text-[#78716C]">
-                    7 Monographs · E-Type, DB5, Carrera RS, 300 SL & more
-                  </p>
+                  <Car className="w-3.5 h-3.5 text-[#143D2B]" />
+                  <span>Classic Automobiles</span>
+                  <span className="text-[10px] font-mono text-[#66615B] bg-[#EAE5DC] px-1.5 py-0.2 rounded">7</span>
                 </a>
 
                 <a
                   href="/classification/vintage-motorcycles"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group p-3.5 bg-[#FBF9F5] border border-[#E7E2D8] hover:border-[#143D2B] rounded-lg transition-all"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FAF8F5] border border-[#E2DDD3] hover:border-[#143D2B] text-[#1C1917] hover:text-[#143D2B] rounded-md transition-all font-medium"
                   title="Open Vintage Motorcycles Classification in a new browser tab"
                 >
-                  <div className="flex items-center justify-between text-xs text-[#143D2B] font-semibold mb-1">
-                    <span className="flex items-center gap-1.5">
-                      <Bike className="w-3.5 h-3.5" />
-                      <span>Vintage Motorcycles</span>
-                    </span>
-                    <ExternalLink className="w-3.5 h-3.5 text-[#A8A29E] group-hover:text-[#143D2B]" />
-                  </div>
-                  <p className="text-[11px] text-[#78716C]">
-                    3 Monographs · Bonneville T120, Commando 850, V7 Sport
-                  </p>
+                  <Bike className="w-3.5 h-3.5 text-[#143D2B]" />
+                  <span>Vintage Motorcycles</span>
+                  <span className="text-[10px] font-mono text-[#66615B] bg-[#EAE5DC] px-1.5 py-0.2 rounded">3</span>
                 </a>
 
                 <a
                   href="/classification/archival-resources"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group p-3.5 bg-[#FBF9F5] border border-[#E7E2D8] hover:border-[#143D2B] rounded-lg transition-all"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FAF8F5] border border-[#E2DDD3] hover:border-[#143D2B] text-[#1C1917] hover:text-[#143D2B] rounded-md transition-all font-medium"
                   title="Open Archival Resources in a new browser tab"
                 >
-                  <div className="flex items-center justify-between text-xs text-[#143D2B] font-semibold mb-1">
-                    <span className="flex items-center gap-1.5">
-                      <Archive className="w-3.5 h-3.5" />
-                      <span>Archival Resources</span>
-                    </span>
-                    <ExternalLink className="w-3.5 h-3.5 text-[#A8A29E] group-hover:text-[#143D2B]" />
-                  </div>
-                  <p className="text-[11px] text-[#78716C]">
-                    30+ Factory Archives, Blueprints & Registries
-                  </p>
+                  <Archive className="w-3.5 h-3.5 text-[#143D2B]" />
+                  <span>Factory Registries</span>
+                  <span className="text-[10px] font-mono text-[#66615B] bg-[#EAE5DC] px-1.5 py-0.2 rounded">30+</span>
                 </a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Catalog Content Grid: 3-Tier Curatorial Layout */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+        {/* Catalog Content Grid: 3-Tier Curatorial Layout with Generous Pacing */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-18 space-y-16 lg:space-y-20">
           
           {/* Tier 1: Lead Feature Story */}
           {leadStory && (
             <section aria-label="Lead Editorial Feature">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 pb-2 border-b border-[#EAE5DC]">
                 <span className="text-xs uppercase tracking-widest font-sans font-semibold text-[#143D2B]">
                   Lead Feature Monograph
                 </span>
@@ -397,7 +379,7 @@ export default function App() {
           {/* Tier 2: Secondary Feature Articles (3 Columns) */}
           {secondaryStories.length > 0 && (
             <section aria-label="Secondary Technical Features">
-              <div className="flex items-center justify-between mb-4 pt-4 border-t border-[#E7E2D8]">
+              <div className="flex items-center justify-between mb-6 pb-2 border-b border-[#EAE5DC]">
                 <span className="text-xs uppercase tracking-widest font-sans font-semibold text-[#143D2B]">
                   Selected Technical Monographs
                 </span>
@@ -412,7 +394,7 @@ export default function App() {
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                 {secondaryStories.map((art) => (
                   <ArticleCard
                     key={art.id}
@@ -429,7 +411,7 @@ export default function App() {
           {/* Tier 3: Department Archive List */}
           {departmentStories.length > 0 && (
             <section aria-label="Department Archive Monographs">
-              <div className="flex items-center justify-between mb-4 pt-4 border-t border-[#E7E2D8]">
+              <div className="flex items-center justify-between mb-6 pb-2 border-b border-[#EAE5DC]">
                 <span className="text-xs uppercase tracking-widest font-sans font-semibold text-[#143D2B]">
                   Archival Engineering Monographs
                 </span>
@@ -437,7 +419,7 @@ export default function App() {
                   ARCHIVE REGISTRY
                 </span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {departmentStories.map((art) => (
                   <ArticleCard
                     key={art.id}
@@ -457,7 +439,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBF9F5] text-[#1C1917] selection:bg-[#143D2B] selection:text-[#FBF9F5]">
+    <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#1C1917] selection:bg-[#143D2B] selection:text-[#FAF8F5]">
       
       {/* Universal Top Bar with Classifications opening in new tabs */}
       <Navbar
